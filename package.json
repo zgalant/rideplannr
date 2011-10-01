@@ -1,12 +1,13 @@
 {
-  "name": "rideplannr",
-  "version": "0.0.1",
-  "dependencies": {
-    "express": "2.2.0",
-    "coffee-script": "1.1.2",
-    "socket.io": "0.6.17",
-    "colors": "0.5.0",
-    "redis": "0.6.7",
-    "redis-url": "0.1.0"
-  }
+    "name": "rideplannr",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express":"2.4.3",
+        "jade: ">= 0.0.1",
+        "mongodb": ">= 0.9.6-18",
+        "socket.io": "0.6.17",
+        "mongoose": "2.2.3",
+        "mongoose-types": "1.0.3"
+    }
 }
