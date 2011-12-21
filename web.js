@@ -140,6 +140,7 @@ function sendNewItems(){
 
 socket.on('connection', function(client){ 
   client.on('message', function(msg){
+      console.log(msg);
       switch(msg.type) {
           case "login":
             console.log("login");
@@ -147,10 +148,30 @@ socket.on('connection', function(client){
           case "log":
             console.log(msg.message);
             break;
+          case "join_group":
+            console.log(msg.fbid + " joining group " + msg.group_name);
+            var group_name = msg.group_name;
+            var fbid = msg.fbid;
+            Group.findOne({name:group_name}, function(err, group) {
+                if (group) {
+                    console.log("group found: " + group._id);
+                } else {
+                    var new_group = new Group({
+                        name:group_name, 
+                        description:"default description"
+                    });
+                    new_group.save();
+                }
+            });
+            break;
+            
       };
-
   });
-
+  
+  client.on("join_group", function(msg) {
+      console.log("JOIN GROUP");
+      console.log(msg);
+  });
   
 });
 

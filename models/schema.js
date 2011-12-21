@@ -66,7 +66,7 @@ function SetUp(Goose) {
     
     // Define Membership model for a Group
     MembershipSchema = new Goose.Schema({
-        user: {type: Goose.ObjectId, ref:'User'},
+        fbid: String,
         group: {type: Goose.ObjectId, ref:'Group'}
     }); 
     MembershipSchema.plugin(Goose.useTimestamps);

@@ -7,7 +7,11 @@ div#fbid.gone= user.fbid
 div
     image#fbimage(src="https://graph.facebook.com/" + user.fbid + "/picture")
 
-div#name
-    name
 
 div= user.fbname
+
+div.spacing
+
+div
+    input#join-group-input(type="text")
+    button#join-group-button(type="submit") Join Group

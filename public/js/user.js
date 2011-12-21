@@ -8,4 +8,14 @@ $(document).ready(function () {
             });
         }
     });
+    
+    $("#join-group-button").live('click', function() {
+        D.log(socket);
+        var group_name = $("#join-group-input").val();
+        socket.send({
+            type:"join_group",
+            group_name:group_name,
+            fbid:fbid,
+        });
+    });
 });

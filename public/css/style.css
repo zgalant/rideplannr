@@ -1,3 +1,7 @@
 .gone {
     display:none;
 }
+
+.spacing {
+    height:10px;
+}
