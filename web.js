@@ -140,6 +140,16 @@ app.post("/login", function(req, res) {
     );
 });
 
+app.get("/group/:id", function(req, res) {
+    var gid = req.params.id;
+    Group.findOne({_id:gid}, function(err, group) {
+        res.render('group.jade', { locals: {
+            title:'RidePlannr',
+            group:group,
+        }});
+    });
+    
+});
 
 // END URLS
 
