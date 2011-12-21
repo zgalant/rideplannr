@@ -168,11 +168,18 @@ socket.on('connection', function(client){
                     new_group.save();
                     group = new_group;
                 }
-                var memb = new Membership({
-                    fbid:fbid,
-                    group:group
+                
+                Membership.findOne({fbid:fbid, group:group}, function(err, membership) {
+                    if (!membership) {
+                        var memb = new Membership({
+                            fbid:fbid,
+                            group:group
+                        });
+                        memb.save();
+                    } else {
+                        console.log("already in this group");
+                    }
                 });
-                memb.save();
             });
             break;
             
@@ -223,6 +230,18 @@ function cleardb() {
     });
     
     Event.find({}, function(err, cars) {
+        for (var i=0; i<cars.length; i++) {
+            cars[i].remove();
+        }
+    });
+    
+    Group.find({}, function(err, cars) {
+        for (var i=0; i<cars.length; i++) {
+            cars[i].remove();
+        }
+    });
+    
+    Membership.find({}, function(err, cars) {
         for (var i=0; i<cars.length; i++) {
             cars[i].remove();
         }
