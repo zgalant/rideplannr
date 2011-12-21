@@ -62,21 +62,32 @@ app.get('/user/:id', function(req, res) {
     var fbid = req.params.id;
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
-            Membership.find({fbid:fbid}, function(err, memberships) {
-                var group_ids = [];
-                for (var i in memberships) {
-                    group_ids.push(memberships[i].group);
-                }
-                Group.find({_id:{$in:group_ids}}, function(err, groups) {
-                    res.render('user.jade', { locals: {
-                        title:'RidePlannr',
-                        user:{
-                            fbid:user.fbid,
-                            fbname:user.first_name + " " + user.last_name,
-                        },
-                        groups:groups
-                    }});
-                });
+            // Membership.find({fbid:fbid}, function(err, memberships) {
+            //     var group_ids = [];
+            //     for (var i in memberships) {
+            //         group_ids.push(memberships[i].group);
+            //     }
+            //     Group.find({_id:{$in:group_ids}}, function(err, groups) {
+            //         res.render('user.jade', { locals: {
+            //             title:'RidePlannr',
+            //             user:{
+            //                 fbid:user.fbid,
+            //                 fbname:user.first_name + " " + user.last_name,
+            //             },
+            //             groups:groups
+            //         }});
+            //     });
+            // });
+            
+            Group.find({_id:{$in:user.groups}}, function(err, groups) {
+                res.render('user.jade', { locals: {
+                    title:'RidePlannr',
+                    user:{
+                        fbid:user.fbid,
+                        fbname:user.first_name + " " + user.last_name,
+                    },
+                    groups:groups
+                }});
             });
 
         } else {
@@ -129,6 +140,7 @@ app.post("/login", function(req, res) {
     );
 });
 
+
 // END URLS
 
 
@@ -174,26 +186,29 @@ socket.on('connection', function(client){
                     group = new_group;
                 }
                 
-                Membership.findOne({fbid:fbid, group:group}, function(err, membership) {
-                    if (!membership) {
-                        var memb = new Membership({
-                            fbid:fbid,
-                            group:group
-                        });
-                        memb.save();
-                    } else {
-                        console.log("already in this group");
+                User.findOne({fbid:fbid}, function(err, user) {
+                    if (user) {
+                        user.groups.push(group);
+                        user.save();
+                        console.log(user);
                     }
                 });
+                // 
+                // Membership.findOne({fbid:fbid, group:group}, function(err, membership) {
+                //     if (!membership) {
+                //         var memb = new Membership({
+                //             fbid:fbid,
+                //             group:group
+                //         });
+                //         memb.save();
+                //     } else {
+                //         console.log("already in this group");
+                //     }
+                // });
             });
             break;
             
       };
-  });
-  
-  client.on("join_group", function(msg) {
-      console.log("JOIN GROUP");
-      console.log(msg);
   });
   
 });
