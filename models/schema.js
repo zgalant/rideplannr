@@ -64,14 +64,6 @@ function SetUp(Goose) {
     }); 
     GroupSchema.plugin(Goose.useTimestamps);
     Group = Goose.mongoose.model('Group', GroupSchema);
-    
-    // Define Membership model for a Group
-    MembershipSchema = new Goose.Schema({
-        fbid: String,
-        group: {type: Goose.ObjectId, ref:'Group'}
-    }); 
-    MembershipSchema.plugin(Goose.useTimestamps);
-    Membership = Goose.mongoose.model('Membership', MembershipSchema);
 }
 
 
