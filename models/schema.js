@@ -60,7 +60,8 @@ function SetUp(Goose) {
     // Define Group model
     GroupSchema = new Goose.Schema({
         name: String,
-        description: String
+        description: String,
+        events: [{type: Goose.ObjectId, ref:'Event'}],
     }); 
     GroupSchema.plugin(Goose.useTimestamps);
     Group = Goose.mongoose.model('Group', GroupSchema);

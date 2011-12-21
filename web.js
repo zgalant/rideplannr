@@ -65,10 +65,7 @@ app.get('/user/:id', function(req, res) {
             Group.find({_id:{$in:user.groups}}, function(err, groups) {
                 res.render('user.jade', { locals: {
                     title:'RidePlannr',
-                    user:{
-                        fbid:user.fbid,
-                        fbname:user.first_name + " " + user.last_name,
-                    },
+                    user:user,
                     groups:groups
                 }});
             });
@@ -127,11 +124,15 @@ app.get("/group/:id", function(req, res) {
     var gid = req.params.id;
     Group.findOne({_id:gid}, function(err, group) {
         User.find({groups : group}, function(err, users) {
-            res.render('group.jade', { locals: {
-                title:'RidePlannr',
-                group:group,
-                users:users,
-            }});
+            Event.find({group : group}, function(err, events) {
+                res.render('group.jade', { locals: {
+                    title:'RidePlannr',
+                    group:group,
+                    users:users,
+                    events:events,
+                }});
+            });
+
         });
 
     });
@@ -191,6 +192,21 @@ socket.on('connection', function(client){
                 });
             });
             break;
+        case "add_event":
+            var event_name = msg.event_name;
+            var gid = msg.group;
+            Group.findOne({_id : gid}, function(err, group) {
+                var nev = new Event({
+                    name:event_name,
+                    info:"default info",
+                    group:group,
+                });
+                nev.save();
+                group.events.push(nev);
+                group.save();
+            });
+            break;
+            
             
       };
   });

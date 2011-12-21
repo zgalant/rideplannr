@@ -1,3 +1,6 @@
+script(type="text/javascript", src="/js/group.js")
+
+div#gid.gone= group._id
 div.spacing
 
 div.group-name= group.name
@@ -10,3 +13,15 @@ div
     - each user in users
         div
             a(href="/user/" + user.fbid)= user.first_name + " " + user.last_name
+            
+div.spacing
+
+div Events:
+div
+    input#add-event-input(type="text")
+    button#add-event-button(type="submit") Add Event
+    
+div
+    - each ev in events
+        div
+            a(href="/event/" + ev._id)= ev.name
