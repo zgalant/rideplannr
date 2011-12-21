@@ -62,7 +62,7 @@ app.get('/user/:id', function(req, res) {
     var fbid = req.params.id;
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
-            res.render('index.jade', { locals: {
+            res.render('user.jade', { locals: {
                 title:'RidePlannr',
                 user:{
                     fbid:user.fbid,
@@ -70,7 +70,7 @@ app.get('/user/:id', function(req, res) {
                 },
             }});
         } else {
-            res.render('index.jade', { locals: {
+            res.render('user.jade', { locals: {
                 title:'RidePlannr',
                 user:{
                     fbid:"#",
