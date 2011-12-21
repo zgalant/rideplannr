@@ -62,13 +62,18 @@ app.get('/user/:id', function(req, res) {
     var fbid = req.params.id;
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
-            res.render('user.jade', { locals: {
-                title:'RidePlannr',
-                user:{
-                    fbid:user.fbid,
-                    fbname:user.first_name + " " + user.last_name,
-                },
-            }});
+            Membership.find({fbid:fbid}, function(err, memberships) {
+                console.log(memberships);
+                res.render('user.jade', { locals: {
+                    title:'RidePlannr',
+                    user:{
+                        fbid:user.fbid,
+                        fbname:user.first_name + " " + user.last_name,
+                    },
+                    memberships:memberships
+                }});
+            });
+
         } else {
             res.render('user.jade', { locals: {
                 title:'RidePlannr',
@@ -161,7 +166,13 @@ socket.on('connection', function(client){
                         description:"default description"
                     });
                     new_group.save();
+                    group = new_group;
                 }
+                var memb = new Membership({
+                    fbid:fbid,
+                    group:group
+                });
+                memb.save();
             });
             break;
             
