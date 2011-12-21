@@ -143,10 +143,14 @@ app.post("/login", function(req, res) {
 app.get("/group/:id", function(req, res) {
     var gid = req.params.id;
     Group.findOne({_id:gid}, function(err, group) {
-        res.render('group.jade', { locals: {
-            title:'RidePlannr',
-            group:group,
-        }});
+        User.find({groups : group}, function(err, users) {
+            res.render('group.jade', { locals: {
+                title:'RidePlannr',
+                group:group,
+                users:users,
+            }});
+        });
+
     });
     
 });

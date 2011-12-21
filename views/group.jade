@@ -1,3 +1,12 @@
+div.spacing
+
 div.group-name= group.name
 
 div.group-description= group.description
+
+div.spacing
+div Users:
+div
+    - each user in users
+        div
+            a(href="/user/" + user.fbid)= user.first_name + " " + user.last_name
