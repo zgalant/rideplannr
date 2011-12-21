@@ -63,15 +63,20 @@ app.get('/user/:id', function(req, res) {
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
             Membership.find({fbid:fbid}, function(err, memberships) {
-                console.log(memberships);
-                res.render('user.jade', { locals: {
-                    title:'RidePlannr',
-                    user:{
-                        fbid:user.fbid,
-                        fbname:user.first_name + " " + user.last_name,
-                    },
-                    memberships:memberships
-                }});
+                var group_ids = [];
+                for (var i in memberships) {
+                    group_ids.push(memberships[i].group);
+                }
+                Group.find({_id:{$in:group_ids}}, function(err, groups) {
+                    res.render('user.jade', { locals: {
+                        title:'RidePlannr',
+                        user:{
+                            fbid:user.fbid,
+                            fbname:user.first_name + " " + user.last_name,
+                        },
+                        groups:groups
+                    }});
+                });
             });
 
         } else {

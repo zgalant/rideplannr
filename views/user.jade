@@ -17,3 +17,9 @@ div
     button#join-group-button(type="submit") Join Group
     
     
+div.spacing
+div Groups:
+div
+    - each group in groups
+        div
+            a(href="/group/" + group._id)= group.name
