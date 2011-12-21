@@ -1,20 +1,11 @@
 
 $(document).ready(function () {
-    FB.init({ 
-        appId:'268047249892587',
-        cookie:true, 
-        status:true,
-        xfbml:true,
-        oath:true 
-    });
-
-    
-    FB.api('/me', function(user) {
-        if(user != null) {
-            $("#fbimage").attr('src', 'https://graph.facebook.com/' + user.id + '/picture');
-            $("#name").html(user.name);
+    var fbid = $("#fbid").html();
+    FB.getLoginStatus(function(response) {
+        if (response.status == "connected") {
+            FB.api('/' + fbid, function(user) {
+                D.log(user);
+            });
         }
     });
-
-
 });

@@ -3,9 +3,11 @@ script(type="text/javascript", src="/js/index.js")
 h1= title
 
 
+div#fbid.gone= user.fbid
 div
-    image#fbimage(src="#")
+    image#fbimage(src="https://graph.facebook.com/" + user.fbid + "/picture")
 
 div#name
     name
 
+div= user.fbname

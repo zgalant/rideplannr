@@ -1,7 +1,8 @@
+D = console;
 function msgReceived(msg){
     switch (msg.type) {
         case "existing_user":
-            window.location = "/home";
+            window.location = "/";
             break;
         case "new_user":
             break;

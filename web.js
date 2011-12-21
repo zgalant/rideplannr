@@ -41,42 +41,82 @@ app.configure('production', function() {
 
 
 // URLS
+app.get('/cleardb', function(req, res) {
+    cleardb();
+    
+    res.render('login.jade', { locals: {
+        title:'Login'
+    }});
+});
 app.get('/', function(req, res) {
-    // cleardb();
+    User.find({}, function(err, users) {
+        console.log("ALL USERS");
+        console.log(users);
+    });
+    
     res.render('login.jade', { locals: {
         title:'Login'
     }});
 });
 app.get('/user/:id', function(req, res) {
-    res.render('index.jade', { locals: {
-        title:'RidePlannr'
-    }});
-});
-
-app.post("/login", function(req, res) {
-    var fbuser = req.body.fbuser;
-    console.log(fbuser);
-    User.findOne({fbid:fbuser.id}, function(err, user) {
-        console.log(err);
-        console.log(user);
-        if (!user) {
-            console.log("making new user");
-            var user = new User({
-                first_name:fbuser.first_name,
-                last_name:fbuser.last_name,
-                fbid:fbuser.id,
-                username:fbuser.username,
-                
-            });
-            user.save();
+    var fbid = req.params.id;
+    User.findOne({fbid:fbid}, function(err, user) {
+        if (user) {
+            res.render('index.jade', { locals: {
+                title:'RidePlannr',
+                user:{
+                    fbid:user.fbid,
+                    fbname:user.first_name + " " + user.last_name,
+                },
+            }});
         } else {
-            console.log("user exists");
-            res.write(JSON.stringify({
-                user:user
-            }));
-            res.end();
+            res.render('index.jade', { locals: {
+                title:'RidePlannr',
+                user:{
+                    fbid:"#",
+                    fbname:"no user exists",
+                },
+            }});
         }
     });
+    
+});
+
+/*
+ * @param fbid  facebook id of user who is logging in
+ */
+app.post("/login", function(req, res) {
+    var fbuser = req.body.fbuser;
+    console.log("/login");
+    console.log(fbuser);
+    User.findOne(
+        {
+            fbid:fbuser.id
+        }, 
+        function(err, user) {
+            if (!user) {
+                console.log("making new user");
+                var user = new User({
+                    first_name:fbuser.first_name,
+                    last_name:fbuser.last_name,
+                    fbid:fbuser.id,
+                    username:fbuser.username,
+                
+                });
+                user.save();
+                res.write(JSON.stringify({
+                    user:user
+                }));
+                res.end();
+            } else {
+                console.log("user exists");
+                res.write(JSON.stringify({
+                    user:user
+                }));
+                res.end();
+            }
+        }
+    );
 });
 
 // END URLS
@@ -125,6 +165,7 @@ setTimeout(function(){
 
 
 function cleardb() {
+    console.log("clearing db");
     Car.find({}, function(err, cars) {
         for (var i=0; i<cars.length; i++) {
             cars[i].remove();
