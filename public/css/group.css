@@ -60,6 +60,10 @@
     margin-left:60px;
 }
 
+#event-list {
+    margin-top:20px;
+}
+
 a.event {
     text-decoration:none;
 }
@@ -72,4 +76,5 @@ a.event div {
 }
 a.event div:hover {
     text-decoration:underline;
+    background:#eee;
 }
