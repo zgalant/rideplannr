@@ -19,3 +19,43 @@ body {
     float:left;
 }
 
+.right {
+    float:right;
+}
+
+#content {
+    width: 960px;
+    clear: both;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 20;
+    background: white;
+    border-radius: 4px;
+    margin-top: 55px;
+}
+
+#header {
+    position: fixed;
+    height: 45px;
+    width: 960px;
+    left: 50%;
+    margin-left: -480px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    z-index: 1000;
+    margin-top:-55px;
+}
+
+.logo {
+    font-size:36px;
+    font-weight:bold;
+    float:left;
+    margin-left: 10px;
+}
+.logo-plannr {
+    color:blue;
+}
+
+#logout-button {
+    margin-top:15px;
+}

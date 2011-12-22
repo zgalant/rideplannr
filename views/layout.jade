@@ -10,7 +10,12 @@ html
     script(type="text/javascript", src="/js/all.js")
   div#fb-root
   
-  div
-      button#logout-button log out
+  div#header
+    div.logo
+        span.logo-ride ride
+        span.logo-plannr plannr
+    button.right#logout-button log out
+    div.clear
   
-  body!= body
+  div#content
+    body!= body
