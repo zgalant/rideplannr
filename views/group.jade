@@ -1,27 +1,34 @@
 script(type="text/javascript", src="/js/group.js")
+link(rel='stylesheet', href='/css/group.css')
 
 div#gid.gone= group._id
+
+div.group-title
+    div.group-name= group.name
+    div.group-description= group.description
+
 div.spacing
-
-div.group-name= group.name
-
-div.group-description= group.description
-
-div.spacing
-div Users:
-div
+div#member-list
     - each user in users
-        div
-            a(href="/user/" + user.fbid)= user.first_name + " " + user.last_name
+        div.member
+            a(href="/user/" + user.fbid)
+                img.user-image(src="http://graph.facebook.com/" + user.fbid + "/picture?type=square") 
+            div.left
+                a.user-name(href="/user/" + user.fbid)= user.first_name + " " + user.last_name
+                div.clear
+                a.user-email(href="mailto:" + user.email)= user.email
+        div.clear
             
-div.spacing
-
-div Events:
-div
-    input#add-event-input(type="text")
-    button#add-event-button(type="submit") Add Event
-    
 div#event-list
-    - each ev in events
-        div
-            a(href="/event/" + ev._id)= ev.name
+    div Events:
+    div
+        input#add-event-input(type="text")
+        button#add-event-button(type="submit") Add Event
+    
+    div#event-list
+        - each ev in events
+            div
+                a(href="/event/" + ev._id)= ev.name
+                
+                
+div.clear

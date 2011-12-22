@@ -1,0 +1,61 @@
+.group-title {
+    margin-bottom:20px;
+    margin-left:8px;
+    color:#333;
+}
+
+.group-name {
+    font-size:28px;
+    font-weight:bold;
+}
+
+.group-info {
+    color:#444;
+    font-size:12px;
+}
+
+#member-list {
+    width:300px;
+    margin-left:10px;
+    padding:10px;
+    border:1px solid #aaa;
+    float:left;
+    height:400px;
+    overflow-y:auto;
+}
+
+.member {
+    padding-bottom:5px;
+    margin-bottom:5px;
+    border-bottom:1px solid #ddd;
+    height:50px;
+}
+
+.user-image {
+    float:left;
+}
+
+.user-email {
+    margin-left:10px;
+    text-decoration:none;
+    color:#888;
+}
+.user-email:hover {
+    text-decoration:underline;
+}
+
+.user-name {
+    float:left;
+    margin-left:10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+.user-name:hover {
+    text-decoration:underline;
+}
+
+#event-list {
+    float:left;
+    margin-left:30px;
+}

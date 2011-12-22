@@ -102,6 +102,7 @@ app.post("/login", function(req, res) {
                     last_name:fbuser.last_name,
                     fbid:fbuser.id,
                     username:fbuser.username,
+                    email:fbuser.email,
                 
                 });
                 user.save();
@@ -242,12 +243,6 @@ function cleardb() {
     });
     
     Ride.find({}, function(err, cars) {
-        for (var i=0; i<cars.length; i++) {
-            cars[i].remove();
-        }
-    });
-    
-    Rider.find({}, function(err, cars) {
         for (var i=0; i<cars.length; i++) {
             cars[i].remove();
         }
