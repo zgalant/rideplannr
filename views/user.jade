@@ -1,16 +1,12 @@
 script(type="text/javascript", src="/js/user.js")
-
-h1= title
-
+link(rel='stylesheet', href='/css/user.css')
 
 div#fbid.gone= user.fbid
 div
-    image#fbimage(src="https://graph.facebook.com/" + user.fbid + "/picture")
+    image.left#fbimage(src="https://graph.facebook.com/" + user.fbid + "/picture?type=large")
+    div.left#user-name= user.first_name + " " + user.last_name
 
-
-div= user.first_name + " " + user.last_name
-
-div.spacing
+div.clear.spacing
 
 div
     input#join-group-input(type="text")
