@@ -20,7 +20,7 @@ div#ride-list
                 div.user-name.driver-name(data-uid = ride.driver)
             div.clear
             button.join-ride-button(type="submit", data-rid=ride._id) Join Ride
-            div.spacing
+            div.clear
             div.riders-list(data-rid=ride._id)
             -each rider in ride.riders
                 div.rider

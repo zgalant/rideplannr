@@ -55,14 +55,50 @@ a div.logo {
     font-weight:bold;
     float:left;
     margin-left: 10px;
+    font-family:'Helvetica Neue';
 }
 .logo-ride {
-    color:black;
+    color:#333;
 }
 .logo-plannr {
-    color:blue;
+    color:#6299c5;
 }
 
 #logout-button {
     margin-top:15px;
+}
+
+button{
+    display:block;
+    float:left;
+    margin:0 7px 0 0;
+    background-color:#f5f5f5;
+    border:1px solid #dedede;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:'Helvetica Neue';
+    font-size:12px;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+button{
+    width:auto;
+    overflow:visible;
+    padding:4px 10px 3px 7px; /* IE6 */
+}
+
+button:hover {
+    background-color:#dff4ff;
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+button:active{
+    background-color:#6299c5;
+    border:1px solid #6299c5;
+    color:#fff;
 }

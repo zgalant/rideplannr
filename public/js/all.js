@@ -10,7 +10,7 @@ var ride_listing_markup =
                                 <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
                             </div>\
                             <button class='join-ride-button' type='submit' data-rid='${ride._id}'>Join Ride</button>\
-                            <div class='spacing'></div>\
+                            <div class='clear'></div>\
                             <div class='riders-list' data-rid='${ride._id}'></div>\
                         </div>";
                         
