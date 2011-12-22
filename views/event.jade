@@ -20,12 +20,15 @@ div#ride-list
     
     - each ride in rides
         div.ride-listing(data-rid=ride._id)
-            div
-                span Driver: 
-                span.ride-driver(data-uid = ride.driver)
+            div.driver
+                img.user-image.driver-image(src="#", data-uid = ride.driver) 
+                div.user-name.driver-name(data-uid = ride.driver)
+            div.clear
             button.join-ride-button(type="submit", data-rid=ride._id) Join Ride
+            div.spacing
             div.riders-list(data-rid=ride._id)
             -each rider in ride.riders
-                div
-                    span Rider: 
-                    span(data-uid = rider)
+                div.rider
+                    img.user-image.rider-image(src="#", data-uid = rider)
+                    div.user-name.rider-name(data-uid = rider)
+                div.clear

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var eid = $("#eid").html();
     
-    $("[data-uid]").each(function() {
+    $(".user-name[data-uid]").each(function() {
         var user_name = this;
         var uid = $(user_name).attr("data-uid");
         D.log(uid);
@@ -16,6 +16,7 @@ $(document).ready(function () {
                 response = JSON.parse(response);
                 var user = response.user;
                 $(user_name).html(user.first_name + " " + user.last_name);
+                $(".user-image[data-uid='" + uid + "']").attr("src", "http://graph.facebook.com/" + user.fbid + "/picture?type=square");
             }
         });
     });

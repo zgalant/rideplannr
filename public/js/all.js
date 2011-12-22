@@ -1,18 +1,39 @@
 D = console;
+
+var group_listing_markup = "<div><a href='/group/${group._id}'>${group.name}</a></div>";
+var evnt_listing_markup = "<div><a href='/event/${event._id}'>${event.name}</a></div>";
+var ride_listing_markup = 
+                        "<div data-rid='${ride._id}' class='ride-listing'>\
+                            <div class='driver'>\
+                                <img class='user-image driver-image'\
+                                    src='http://graph.facebook.com/${driver.fbid}/picture?type=square' />\
+                                <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
+                            </div>\
+                            <button class='join-ride-button' type='submit' data-rid='${ride._id}'>Join Ride</button>\
+                            <div class='spacing'></div>\
+                            <div class='riders-list' data-rid='${ride._id}'></div>\
+                        </div>";
+                        
+var rider_in_car = "<div class='rider'>\
+                        <img class='user-image rider-image'\
+                            src='http://graph.facebook.com/${rider.fbid}/picture?type=square' />\
+                        <div class='user-name rider-name'>${rider.first_name} ${rider.last_name}</div>\
+                    </div><div class='clear'></div>";
+
 function msgReceived(msg){
     if (msg.path == window.location.pathname) {
         switch (msg.type) {
             case "join_group":
-                $("#group-list").append("<div><a href='/group/" + msg.group._id + "'>" + msg.group.name + "</a></div>");
+                $.tmpl(group_listing_markup, msg).appendTo("#group-list");
                 break;
             case "add_event":
-                $("#event-list").append("<div><a href='/event/" + msg.event._id + "'>" + msg.event.name + "</a></div>");
+                $.tmpl(evnt_listing_markup, msg).appendTo("#event-list");
                 break;
             case "add_car":
-                $("#ride-list").append("<div data-rid='" + msg.ride._id + "' class='ride-listing'><div>Driver: " + msg.driver.first_name + " " + msg.driver.last_name + "</div><button class='join-ride-button' type='submit' data-rid='" + msg.ride._id + "'>Join Ride</button><div class='riders-list' data-rid='" + msg.ride._id + "'></div></div>");
+                $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
                 break;
             case "join_car":
-                $(".riders-list[data-rid='" + msg.ride._id + "']").append("<div>Rider: " + msg.rider.first_name + " " + msg.rider.last_name + "</div>");
+                $.tmpl(rider_in_car, msg).appendTo(".riders-list[data-rid='" + msg.ride._id + "']");
                 break;
         }
     }
