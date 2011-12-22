@@ -64,7 +64,7 @@ app.get('/user/:id', function(req, res) {
         if (user) {
             Group.find({_id:{$in:user.groups}}, function(err, groups) {
                 res.render('user.jade', { locals: {
-                    title:'RidePlannr',
+                    title:'RidePlannr - ' + user.first_name + " " + user.last_name,
                     user:user,
                     groups:groups
                 }});
@@ -126,7 +126,7 @@ app.get("/group/:id", function(req, res) {
         User.find({groups : group}, function(err, users) {
             Event.find({group : group}, function(err, events) {
                 res.render('group.jade', { locals: {
-                    title:'RidePlannr',
+                    title:'RidePlannr - ' + group.name,
                     group:group,
                     users:users,
                     events:events,
@@ -145,7 +145,7 @@ app.get("/event/:id", function(req, res) {
             Ride.find({_id : {$in: ev.rides}}, function(err, rides) {
                 console.log(rides);
                 res.render('event.jade', { locals: {
-                    title:'RidePlannr',
+                    title:'RidePlannr - ' + ev.name,
                     event:ev,
                     group:group,
                     rides:rides,
@@ -157,14 +157,11 @@ app.get("/event/:id", function(req, res) {
 
 app.get("/ajax/get_user", function(req, res) {
     var uid = req.query.uid;
-    console.log('/ajax/get_user?uid=' + uid);
     User.findOne({_id:uid}, function(err, user) {
-        console.log(user);
         res.write(JSON.stringify({
             user:user
         }));
         res.end();
-        console.log(res);
         return;
     });
 });
@@ -254,9 +251,7 @@ socket.on('connection', function(client){
             var fbid = msg.fbid;
             
             User.findOne({fbid: fbid}, function(err, user) {
-                console.log(user);
                 Event.findOne({_id : eid}, function(err, ev) {
-                    console.log(ev);
                     var ride = new Ride({
                         driver:user,
                     });
@@ -277,9 +272,7 @@ socket.on('connection', function(client){
             var fbid = msg.fbid;
 
             User.findOne({fbid: fbid}, function(err, user) {
-                console.log(user);
                 Ride.findOne({_id : rid}, function(err, ride) {
-                    console.log(ride);
                     ride.riders.push(user);
                     ride.save();
                     buffer.push({
