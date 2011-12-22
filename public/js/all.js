@@ -1,7 +1,7 @@
 D = console;
 
 var group_listing_markup = "<div><a href='/group/${group._id}'>${group.name}</a></div>";
-var evnt_listing_markup = "<div><a href='/event/${event._id}'>${event.name}</a></div>";
+var evnt_listing_markup = "<a href='/event/${event._id}' class='event'><div>${event.name}</div></a>";
 var ride_listing_markup = 
                         "<div data-rid='${ride._id}' class='ride-listing'>\
                             <div class='driver'>\
@@ -65,6 +65,11 @@ $(document).ready(function () {
             console.log('logged out');
             window.location = "/";
         });
+    });
+    
+    $(".close-popup").live('click', function() {
+        $(".popup").addClass("gone");
+        $(".popup input, .popup textarea").val("");
     });
     
 

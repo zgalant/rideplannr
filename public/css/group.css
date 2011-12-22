@@ -78,3 +78,32 @@ a.event div:hover {
     text-decoration:underline;
     background:#eee;
 }
+
+
+#new-event-popup div {
+}
+
+#new-event-popup input {
+    font-size:18px;
+}
+#new-event-popup input {
+    padding:2px;
+    margin-top:5px;
+    width:400px;
+}
+#new-event-popup button {
+    float:left;
+}
+
+#new-event-popup div.field {
+    margin-top:10px;
+}
+
+#new-event-popup #add-event-info {
+    width: 400px;
+    height: 100px;
+    font-size:12px;
+    padding:2px;
+    color:#333;
+    margin-top:10px;
+}

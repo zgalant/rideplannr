@@ -35,11 +35,12 @@ function Actions() {
     }
     Action.add_event = function(msg, Goose, buffer) {
         var event_name = msg.event_name;
+        var event_info = msg.event_info;
         var gid = msg.group;
         Group.findOne({_id : gid}, function(err, group) {
             var nev = new Event({
                 name:event_name,
-                info:"default info",
+                info:event_info,
                 group:group,
             });
             nev.save();

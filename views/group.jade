@@ -21,9 +21,7 @@ div#member-list
             
 div#events
     div Events:
-    div
-        input#add-event-input(type="text")
-        button#add-event-button(type="submit") Add Event
+        button.right#show-event-popup(type="submit") Add New Event
     
     div#event-list
         - each ev in events
@@ -32,3 +30,19 @@ div#events
                 
                 
 div.clear
+
+div#new-event-popup.popup.gone
+    div.header Add New Event
+        
+    div.field
+        label Event Name
+        div.clear
+        input#add-event-name(type="text")
+    div.field
+        label Event Info
+        div.clear
+        textarea#add-event-info(type="text")
+    div.clear
+    div.buttons
+        button#add-event-button(type="submit") Add Event
+        button.close-popup(type="submit") Cancel
