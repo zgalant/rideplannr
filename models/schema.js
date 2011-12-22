@@ -30,22 +30,13 @@ function SetUp(Goose) {
         driver: {type: Goose.ObjectId, ref:'User'},
         riders: [{type: Goose.ObjectId, ref:'User'}],
         car: {type: Goose.ObjectId, ref:'Car'},
+        num_seats: Number,
         notes: String,
         leaving_date: Date,
         return_date: Date
     });
     RideSchema.plugin(Goose.useTimestamps);
     Ride = Goose.mongoose.model('Ride', RideSchema);
-
-    // Define Rider model
-    RiderSchema = new Goose.Schema({
-        ride: {type: Goose.ObjectId, ref:'Ride'},
-        user: {type: Goose.ObjectId, ref:'User'},
-        notes: String
-    });
-    RiderSchema.plugin(Goose.useTimestamps);
-    Rider = Goose.mongoose.model('Rider', RiderSchema);
-
 
     // Define Event model
     EventSchema = new Goose.Schema({
