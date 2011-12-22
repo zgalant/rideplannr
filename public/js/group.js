@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     var gid = $("#gid").html();
     $("#add-event-button").live('click', function() {

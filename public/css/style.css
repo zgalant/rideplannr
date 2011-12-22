@@ -5,3 +5,18 @@
 .spacing {
     height:10px;
 }
+
+.clear {
+    clear:both;
+}
+
+.left {
+    float:left;
+}
+
+.ride-listing {
+    padding:20px;
+    float:left;
+    width:240px;
+    height:200px;
+}

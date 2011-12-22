@@ -138,6 +138,37 @@ app.get("/group/:id", function(req, res) {
     });
 });
 
+app.get("/event/:id", function(req, res) {
+    var eid = req.params.id;
+    Event.findOne({_id:eid}, function(err, ev) {
+        Group.findOne({_id : ev.group}, function(err, group) {
+            Ride.find({_id : {$in: ev.rides}}, function(err, rides) {
+                console.log(rides);
+                res.render('event.jade', { locals: {
+                    title:'RidePlannr',
+                    event:ev,
+                    group:group,
+                    rides:rides,
+                }});
+            });
+        });
+    });
+});
+
+app.get("/ajax/get_user", function(req, res) {
+    var uid = req.query.uid;
+    console.log('/ajax/get_user?uid=' + uid);
+    User.findOne({_id:uid}, function(err, user) {
+        console.log(user);
+        res.write(JSON.stringify({
+            user:user
+        }));
+        res.end();
+        console.log(res);
+        return;
+    });
+});
+
 // END URLS
 
 
@@ -218,6 +249,49 @@ socket.on('connection', function(client){
                 });
             });
             break;
+        case "add_car":
+            var eid = msg.eid;
+            var fbid = msg.fbid;
+            
+            User.findOne({fbid: fbid}, function(err, user) {
+                console.log(user);
+                Event.findOne({_id : eid}, function(err, ev) {
+                    console.log(ev);
+                    var ride = new Ride({
+                        driver:user,
+                    });
+                    ride.save();
+                    ev.rides.push(ride);
+                    ev.save();
+                    buffer.push({
+                        path:msg.path,
+                        type:"add_car",
+                        ride:ride,
+                        driver:user,
+                    });
+                });
+            });
+            break;
+        case "join_car":
+            var rid = msg.rid;
+            var fbid = msg.fbid;
+
+            User.findOne({fbid: fbid}, function(err, user) {
+                console.log(user);
+                Ride.findOne({_id : rid}, function(err, ride) {
+                    console.log(ride);
+                    ride.riders.push(user);
+                    ride.save();
+                    buffer.push({
+                        path:msg.path,
+                        type:"join_car",
+                        ride:ride,
+                        rider:user,
+                    });
+                });
+            });
+            break;
+            
             
             
       };

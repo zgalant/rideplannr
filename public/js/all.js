@@ -8,6 +8,12 @@ function msgReceived(msg){
             case "add_event":
                 $("#event-list").append("<div><a href='/event/" + msg.event._id + "'>" + msg.event.name + "</a></div>");
                 break;
+            case "add_car":
+                $("#ride-list").append("<div data-rid='" + msg.ride._id + "' class='ride-listing'><div>Driver: " + msg.driver.first_name + " " + msg.driver.last_name + "</div><button class='join-ride-button' type='submit' data-rid='" + msg.ride._id + "'>Join Ride</button><div class='riders-list' data-rid='" + msg.ride._id + "'></div></div>");
+                break;
+            case "join_car":
+                $(".riders-list[data-rid='" + msg.ride._id + "']").append("<div>Rider: " + msg.rider.first_name + " " + msg.rider.last_name + "</div>");
+                break;
         }
     }
 }
