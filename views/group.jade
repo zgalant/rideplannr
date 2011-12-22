@@ -19,7 +19,7 @@ div#member-list
                 a.user-email(href="mailto:" + user.email)= user.email
         div.clear
             
-div#event-list
+div#events
     div Events:
     div
         input#add-event-input(type="text")
@@ -27,8 +27,8 @@ div#event-list
     
     div#event-list
         - each ev in events
-            div
-                a(href="/event/" + ev._id)= ev.name
+            a.event(href="/event/" + ev._id)
+                div= ev.name
                 
                 
 div.clear
