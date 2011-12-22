@@ -1,6 +1,6 @@
 D = console;
 
-var group_listing_markup = "<div><a href='/group/${group._id}'>${group.name}</a></div>";
+var group_listing_markup = "<a href='/group/${group._id}' class='group'><div>${group.name}</div></a>";
 var evnt_listing_markup = "<a href='/event/${event._id}' class='event'><div>${event.name}</div></a>";
 var ride_listing_markup = 
                         "<div data-rid='${ride._id}' class='ride-listing'>\

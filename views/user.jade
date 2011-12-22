@@ -8,14 +8,18 @@ div
 
 div.clear.spacing
 
-div
+div.gone
     input#join-group-input(type="text")
     button#join-group-button(type="submit") Join Group
     
     
 div.spacing
-div Groups:
-div#group-list
-    - each group in groups
-        div
-            a(href="/group/" + group._id)= group.name
+
+div#groups
+    div Groups:
+        button.right#show-group-popup(type="submit") Join A Group
+
+    div#group-list
+        - each group in groups
+            a.group(href="/group/" + group._id)
+                div= group.name

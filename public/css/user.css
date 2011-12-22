@@ -10,3 +10,26 @@
     color:#333;
     font-weight:bold;
 }
+
+#groups {
+    float:left;
+}
+
+#group-list {
+    margin-top:20px;
+}
+
+a.group {
+    text-decoration:none;
+}
+a.group div {
+    padding:10px;
+    width:300px;
+    border-bottom: 1px solid #ccc;
+    color:#333;
+    font-size:20px;
+}
+a.group div:hover {
+    text-decoration:underline;
+    background:#eee;
+}
