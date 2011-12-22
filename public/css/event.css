@@ -1,3 +1,22 @@
+.event-title {
+    margin-bottom:20px;
+    margin-left:8px;
+}
+
+.event-name {
+    font-size:28px;
+    font-weight:bold;
+}
+
+.event-info {
+    color:#444;
+    font-size:12px;
+}
+
+#add-ride-button {
+    margin-left:8px;
+}
+
 .ride-listing {
     padding:10px;
     margin:8px;

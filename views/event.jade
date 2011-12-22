@@ -2,17 +2,11 @@ script(type="text/javascript", src="/js/event.js")
 link(rel='stylesheet', href='/css/event.css')
 
 div#eid.gone= event._id
-div.spacing
 
-div.group-name
-    a(href="/group/" + event.group._id)= event.group.name
-div.event-name= event.name
-
-div.event-info= event.info
+div.event-title
+    div.event-name= event.name
+    div.event-info= event.info
             
-div.spacing
-
-div Rides:
 div#ride-list
     button.left#add-ride-button(type="submit") Add Your Car
     div.spacing
