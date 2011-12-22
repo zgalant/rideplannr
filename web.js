@@ -188,6 +188,13 @@ socket.on('connection', function(client){
                         user.groups.push(group);
                         user.save();
                         console.log(user);
+                        
+                        buffer.push({
+                            path:msg.path,
+                            type:"join_group",
+                            group:group,
+                            user:user,
+                        });
                     }
                 });
             });
@@ -204,6 +211,11 @@ socket.on('connection', function(client){
                 nev.save();
                 group.events.push(nev);
                 group.save();
+                buffer.push({
+                    path:msg.path,
+                    type:"add_event",
+                    event:nev,
+                });
             });
             break;
             

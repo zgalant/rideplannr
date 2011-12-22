@@ -1,11 +1,14 @@
 D = console;
 function msgReceived(msg){
-    switch (msg.type) {
-        case "existing_user":
-            window.location = "/";
-            break;
-        case "new_user":
-            break;
+    if (msg.path == window.location.pathname) {
+        switch (msg.type) {
+            case "join_group":
+                $("#group-list").append("<div><a href='/group/" + msg.group._id + "'>" + msg.group.name + "</a></div>");
+                break;
+            case "add_event":
+                $("#event-list").append("<div><a href='/event/" + msg.event._id + "'>" + msg.event.name + "</a></div>");
+                break;
+        }
     }
 }
 

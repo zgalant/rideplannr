@@ -16,6 +16,7 @@ $(document).ready(function () {
             type:"join_group",
             group_name:group_name,
             fbid:fbid,
+            path:window.location.pathname,
         });
     });
     

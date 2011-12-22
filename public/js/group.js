@@ -8,6 +8,7 @@ $(document).ready(function () {
             type:"add_event",
             group:gid,
             event_name:event_name,
+            path:window.location.pathname,
         });
     });
     

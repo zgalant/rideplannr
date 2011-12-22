@@ -21,7 +21,7 @@ div
     input#add-event-input(type="text")
     button#add-event-button(type="submit") Add Event
     
-div
+div#event-list
     - each ev in events
         div
             a(href="/event/" + ev._id)= ev.name
