@@ -272,10 +272,4 @@ function cleardb() {
             cars[i].remove();
         }
     });
-    
-    Membership.find({}, function(err, cars) {
-        for (var i=0; i<cars.length; i++) {
-            cars[i].remove();
-        }
-    });
 }
