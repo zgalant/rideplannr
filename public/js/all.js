@@ -35,11 +35,7 @@ var rider_in_car_markup = "<div class='rider'>\
                         <div class='user-name rider-name'>${rider.first_name} ${rider.last_name}</div>\
                     </div><div class='clear'></div>";
 
-function alert_user(text, user) {
-    if (user == cur_user) {
-        alert(text);
-    }
-}
+
 
 function msgReceived(msg){
     if (msg.path == window.location.pathname) {
@@ -54,7 +50,7 @@ function msgReceived(msg){
                 if (msg.success) {
                     $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
                 } else {
-                    alert_user("You're already driving a car for this event.", msg.sender);
+                    Alerts.alert_user("You're already driving a car for this event.", msg.sender);
                 }
                 
                 break;
@@ -76,7 +72,7 @@ function msgReceived(msg){
                     }
                 }
                 if (alert_text != "") {
-                    alert_user(alert_text, msg.sender);
+                    Alerts.alert_user(alert_text, msg.sender);
                 }
                 break;
         }

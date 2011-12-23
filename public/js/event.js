@@ -32,6 +32,12 @@ $(document).ready(function () {
                 var leaving = $("#leaving").val();
                 var returning = $("#returning").val();
                 var notes = $("#ride-notes").val();
+                if (parseInt(there <= 0) || parseInt(back) <= 0) {
+                    Alerts.alert_user("Invalid number of seats in the car.", fbid);
+                    return;
+                }
+                $("#new-popup input, #new-popup textarea").val("");
+                $(".popup").addClass("gone");
                 socket.send({
                     type:"add_car",
                     fbid:fbid,
@@ -50,11 +56,7 @@ $(document).ready(function () {
             
             $("#show-add-ride").live('click', function() {
                 $("#new-popup").removeClass("gone");
-            });
-
-            $("#add-ride-button").live('click', function() {
-                $("#new-popup input, #new-popup textarea").val("");
-                $(".popup").addClass("gone");
+                $("#new-popup input[type='number']").val("4");
             });
             
             $(".join-ride-there").live('click', function() {
