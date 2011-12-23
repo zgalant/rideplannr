@@ -99,14 +99,14 @@ function Actions() {
                 var way_there_success = false;
                 var way_back_success = false;
                 if (way_there) {
-                    if (ride.way_there.length < ride.seats.there) {
-                        ride.way_there.push(user);
+                    if (ride.riders.there.length < ride.seats.there) {
+                        ride.riders.there.push(user);
                         way_there_success = true;
                     }
                 }
                 if (way_back) {
-                    if (ride.way_back.length < ride.seats.back) {
-                        ride.way_back.push(user);
+                    if (ride.riders.back.length < ride.seats.back) {
+                        ride.riders.back.push(user);
                         way_back_success = true;
                     }
                 }

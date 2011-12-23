@@ -32,7 +32,7 @@ div#ride-list
                     span= ride.seats.there
                     span &nbsp;spots) Leaving:  
                     span= ride.leaving
-                -each rider in ride.way_there
+                -each rider in ride.riders.there
                     div.rider
                         img.user-image.rider-image(src="#", data-uid = rider)
                         div.user-name.rider-name(data-uid = rider)
@@ -42,7 +42,7 @@ div#ride-list
                     span= ride.seats.back
                     span &nbsp;spots) Returning: 
                     span= ride.returning
-                -each rider in ride.way_back
+                -each rider in ride.riders.back
                     div.rider
                         img.user-image.rider-image(src="#", data-uid = rider)
                         div.user-name.rider-name(data-uid = rider)
