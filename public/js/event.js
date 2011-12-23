@@ -36,8 +36,10 @@ $(document).ready(function () {
                     type:"add_car",
                     fbid:fbid,
                     eid:eid,
-                    seats_there:there,
-                    seats_back:back,
+                    seats:{
+                        there:there,
+                        back:back,
+                    },
                     notes:notes,
                     leaving:leaving,
                     returning:returning,

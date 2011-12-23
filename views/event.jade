@@ -29,7 +29,7 @@ div#ride-list
             div.clear
             div.way-there.riders-list(data-rid=ride._id)
                 div.rider Way There \(
-                    span= ride.seats_there
+                    span= ride.seats.there
                     span &nbsp;spots) Leaving:  
                     span= ride.leaving
                 -each rider in ride.way_there
@@ -39,7 +39,7 @@ div#ride-list
                     div.clear
             div.way-back.riders-list(data-rid=ride._id)
                 div.rider Way Back \(
-                    span= ride.seats_back
+                    span= ride.seats.back
                     span &nbsp;spots) Returning: 
                     span= ride.returning
                 -each rider in ride.way_back

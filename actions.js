@@ -57,9 +57,7 @@ function Actions() {
     Action.add_car = function(msg, Goose, buffer) {
         var eid = msg.eid;
         var fbid = msg.fbid;
-        var seats_there = msg.seats_there;
-        var seats_back = msg.seats_back;
-        console.log(seats_there);
+        var seats = msg.seats;
         var leaving = msg.leaving;
         var returning = msg.returning;
         var notes = msg.notes;
@@ -68,8 +66,7 @@ function Actions() {
             Event.findOne({_id : eid}, function(err, ev) {
                 var ride = new Ride({
                     driver:user,
-                    seats_there:seats_there,
-                    seats_back:seats_back,
+                    seats:seats,
                     leaving:leaving,
                     returning:returning,
                     notes:notes,
@@ -82,8 +79,7 @@ function Actions() {
                     type:"add_car",
                     ride:ride,
                     driver:user,
-                    seats_there:seats_there,
-                    seats_back:seats_back,
+                    seats:seats,
                     leaving:leaving,
                     returning:returning,
                     notes:notes,
@@ -100,11 +96,19 @@ function Actions() {
 
         User.findOne({fbid: fbid}, function(err, user) {
             Ride.findOne({_id : rid}, function(err, ride) {
+                var way_there_success = false;
+                var way_back_success = false;
                 if (way_there) {
-                    ride.way_there.push(user);
+                    if (ride.way_there.length < ride.seats.there) {
+                        ride.way_there.push(user);
+                        way_there_success = true;
+                    }
                 }
                 if (way_back) {
-                    ride.way_back.push(user);
+                    if (ride.way_back.length < ride.seats.back) {
+                        ride.way_back.push(user);
+                        way_back_success = true;
+                    }
                 }
                 ride.save();
                 buffer.push({
@@ -114,6 +118,10 @@ function Actions() {
                     rider:user,
                     way_there:way_there,
                     way_back:way_back,
+                    success:{
+                        way_there:way_there_success,
+                        way_back:way_back_success,
+                    },
                 });
             });
         });

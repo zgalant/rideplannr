@@ -21,14 +21,14 @@ var ride_listing_markup =
                             </div>\
                             <div class='clear'></div>\
                             <div class='riders-list way-there' data-rid='${ride._id}'>\
-                                <div class='rider'>Way There (${seats_there} spots) Leaving: ${leaving}</div>\
+                                <div class='rider'>Way There (${seats.there} spots) Leaving: ${leaving}</div>\
                             </div>\
                             <div class='riders-list way-back' data-rid='${ride._id}'>\
-                                <div class='rider'>Way Back (${seats_back} spots) Returning: ${returning}</div>\
+                                <div class='rider'>Way Back (${seats.back} spots) Returning: ${returning}</div>\
                             </div>\
                         </div>";
                         
-var rider_in_car = "<div class='rider'>\
+var rider_in_car_markup = "<div class='rider'>\
                         <img class='user-image rider-image'\
                             src='http://graph.facebook.com/${rider.fbid}/picture?type=square' />\
                         <div class='user-name rider-name'>${rider.first_name} ${rider.last_name}</div>\
@@ -47,11 +47,24 @@ function msgReceived(msg){
                 $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
                 break;
             case "join_car":
+                var alert_text = "";
                 if (msg.way_there) {
-                    $.tmpl(rider_in_car, msg).appendTo(".way-there[data-rid='" + msg.ride._id + "']");
+                    if (msg.success.way_there) {
+                        $.tmpl(rider_in_car_markup, msg).appendTo(".way-there[data-rid='" + msg.ride._id + "']");
+                    } else {
+                        alert_text = "Sorry, there is no space on the way there.\n";
+                    }
+                    
                 }
                 if (msg.way_back) {
-                    $.tmpl(rider_in_car, msg).appendTo(".way-back[data-rid='" + msg.ride._id + "']");
+                    if (msg.success.way_back) {
+                        $.tmpl(rider_in_car_markup, msg).appendTo(".way-back[data-rid='" + msg.ride._id + "']");
+                    } else {
+                        alert_text = alert_text + "Sorry, there is no space on the way back.";
+                    }
+                }
+                if (alert_text != "") {
+                    alert(alert_text);
                 }
                 break;
         }

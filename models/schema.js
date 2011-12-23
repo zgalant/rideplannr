@@ -20,8 +20,10 @@ function SetUp(Goose) {
         driver: {type: Goose.ObjectId, ref:'User'},
         way_there: [{type: Goose.ObjectId, ref:'User'}],
         way_back: [{type: Goose.ObjectId, ref:'User'}],
-        seats_there: Number,
-        seats_back: Number,
+        seats: {
+            there: Number,
+            back: Number,
+        },
         notes: String,
         leaving: String,
         returning: String,
