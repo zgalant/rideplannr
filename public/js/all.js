@@ -7,7 +7,11 @@ var ride_listing_markup =
                             <div class='driver'>\
                                 <img class='user-image driver-image'\
                                     src='http://graph.facebook.com/${driver.fbid}/picture?type=square' />\
-                                <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
+                                <div class='driver-info'>\
+                                    <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
+                                    <div class='clear'></div>\
+                                    <div class='ride-notes'>${ride.notes}</div>\
+                                </div>\
                                 <div class='join-ride-buttons'>\
                                     <div class='hopin'>Hop in:</div>\
                                     <button class='join-ride-there' type='submit' data-rid='${ride._id}'>Way There</button>\

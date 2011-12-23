@@ -29,8 +29,6 @@ $(document).ready(function () {
             $("#add-ride-button").live('click', function() {
                 var there = $("#way-there").val();
                 var back = $("#way-back").val();
-                console.log(there);
-                console.log(back);
                 var leaving = $("#leaving").val();
                 var returning = $("#returning").val();
                 var notes = $("#ride-notes").val();

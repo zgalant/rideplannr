@@ -17,7 +17,10 @@ div#ride-list
         div.ride-listing(data-rid=ride._id)
             div.driver
                 img.user-image.driver-image(src="#", data-uid = ride.driver) 
-                div.user-name.driver-name(data-uid = ride.driver)
+                div.driver-info
+                    div.user-name.driver-name(data-uid = ride.driver)
+                    div.clear
+                    div.ride-notes= ride.notes
                 div.join-ride-buttons
                     div.hopin Hop in:
                     button.join-ride-there(type="submit", data-rid=ride._id) Way There

@@ -34,6 +34,13 @@
     margin-bottom:5px;
 }
 
+.driver-info {
+    float:left;
+    width:550px;
+    height:30px;
+    overflow:hidden;
+}
+
 .driver-image {
     width:30px;
     height:30px;
@@ -41,10 +48,15 @@
 }
 
 .driver-name {
-    font-size:18px;
+    font-size: 16px;
+    margin-left: 10px;
+    float: left;
+}
+
+.ride-notes {
+    font-size:10px;
     margin-left:10px;
-    margin-top:5px;
-    float:left;
+    color:#888;
 }
 
 .rider {
