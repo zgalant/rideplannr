@@ -17,9 +17,27 @@ div.spacing
 
 div#groups
     div Groups:
-        button.right#show-group-popup(type="submit") Join A Group
+        button.right#show-group-popup(type="submit") Add A New Group
 
     div#group-list
         - each group in groups
             a.group(href="/group/" + group._id)
                 div= group.name
+                
+div.clear
+
+div#new-popup.popup.gone
+    div.header Add New Group
+
+    div.field
+        label Group Name
+        div.clear
+        input#add-group-name(type="text")
+    div.field
+        label Group Description
+        div.clear
+        textarea#add-group-info(type="text")
+    div.clear
+    div.buttons
+        button#add-group-button(type="submit") Add Group
+        button.close-popup(type="submit") Cancel

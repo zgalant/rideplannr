@@ -14,11 +14,11 @@ $(document).ready(function () {
     });
     
     $("#show-event-popup").live('click', function() {
-        $("#new-event-popup").removeClass("gone");
+        $("#new-popup").removeClass("gone");
     });
     
     $("#add-event-button").live('click', function() {
-        $("#new-event-popup input, #new-event-popup textarea").val("");
+        $("#new-popup input, #new-popup textarea").val("");
         $(".popup").addClass("gone");
     });
     

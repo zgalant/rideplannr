@@ -4,6 +4,7 @@ function Actions() {
     Action.join_group = function(msg, Goose, buffer) {
         console.log(msg.fbid + " joining group " + msg.group_name);
         var group_name = msg.group_name;
+        var group_info = msg.group_info;
         var fbid = msg.fbid;
         Group.findOne({name:group_name}, function(err, group) {
             if (group) {
@@ -11,7 +12,7 @@ function Actions() {
             } else {
                 var new_group = new Group({
                     name:group_name, 
-                    description:"default description"
+                    description:group_info,
                 });
                 new_group.save();
                 group = new_group;
