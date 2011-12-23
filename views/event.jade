@@ -8,7 +8,7 @@ div.event-title
     div.event-info= event.info
             
 div#ride-list
-    button.left#add-ride-button(type="submit") Add Your Car
+    button.left#show-add-ride(type="submit") Add Your Car
     div.spacing
     div.spacing
     div.spacing
@@ -25,16 +25,56 @@ div#ride-list
                     button.join-ride-both(type="submit", data-rid=ride._id) Both
             div.clear
             div.way-there.riders-list(data-rid=ride._id)
-                div.rider Way There
+                div.rider Way There \(
+                    span= ride.seats_there
+                    span &nbsp;spots)
+                div.rider Leaving: 
+                    span= ride.leaving
                 -each rider in ride.way_there
                     div.rider
                         img.user-image.rider-image(src="#", data-uid = rider)
                         div.user-name.rider-name(data-uid = rider)
                     div.clear
             div.way-back.riders-list(data-rid=ride._id)
-                div.rider Way Back
+                div.rider Way Back \(
+                    span= ride.seats_back
+                    span &nbsp;spots)
+                div.rider Returning: 
+                    span= ride.returning
                 -each rider in ride.way_back
                     div.rider
                         img.user-image.rider-image(src="#", data-uid = rider)
                         div.user-name.rider-name(data-uid = rider)
                     div.clear
+                    
+                    
+div.clear
+div#new-popup.popup.gone
+    div.header Add Your Car
+        
+    div.field.left
+        label Number of Seats There
+        div.clear
+        input#way-there(type="number", value=4)
+    div.field.left
+        label Number of Seats Back
+        div.clear
+        input#way-back(type="number", value=4)
+    div.clear
+    div.field.left
+        label Leaving
+        div.clear
+        input#leaving(type="datetime")
+    div.field.left
+        label Returning
+        div.clear
+        input#returning(type="datetime")
+    div.clear
+    div.field
+        label Notes
+        div.clear
+        textarea#ride-notes(type="text")
+    div.clear
+    div.buttons
+        button#add-ride-button(type="submit") Add Car
+        button.close-popup(type="submit") Cancel

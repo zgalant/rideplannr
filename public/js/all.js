@@ -17,10 +17,12 @@ var ride_listing_markup =
                             </div>\
                             <div class='clear'></div>\
                             <div class='riders-list way-there' data-rid='${ride._id}'>\
-                                <div class='rider'>Way There</div>\
+                                <div class='rider'>Way There (${seats_there} spots)</div>\
+                                <div class='rider'>Leaving: ${leaving}</div>\
                             </div>\
                             <div class='riders-list way-back' data-rid='${ride._id}'>\
-                                <div class='rider'>Way Back</div>\
+                                <div class='rider'>Way Back (${seats_back} spots)</div>\
+                                <div class='rider'>Returning: ${returning}</div>\
                             </div>\
                         </div>";
                         

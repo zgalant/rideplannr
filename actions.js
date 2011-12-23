@@ -57,11 +57,22 @@ function Actions() {
     Action.add_car = function(msg, Goose, buffer) {
         var eid = msg.eid;
         var fbid = msg.fbid;
+        var seats_there = msg.seats_there;
+        var seats_back = msg.seats_back;
+        console.log(seats_there);
+        var leaving = msg.leaving;
+        var returning = msg.returning;
+        var notes = msg.notes;
         
         User.findOne({fbid: fbid}, function(err, user) {
             Event.findOne({_id : eid}, function(err, ev) {
                 var ride = new Ride({
                     driver:user,
+                    seats_there:seats_there,
+                    seats_back:seats_back,
+                    leaving:leaving,
+                    returning:returning,
+                    notes:notes,
                 });
                 ride.save();
                 ev.rides.push(ride);
@@ -71,6 +82,11 @@ function Actions() {
                     type:"add_car",
                     ride:ride,
                     driver:user,
+                    seats_there:seats_there,
+                    seats_back:seats_back,
+                    leaving:leaving,
+                    returning:returning,
+                    notes:notes,
                 });
             });
         });

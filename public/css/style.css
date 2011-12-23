@@ -107,7 +107,7 @@ button:active{
     z-index:200;
     position:fixed;
     width:410px;
-    height:260px;
+    min-height:260px;
     top:100px;
     left:50%;
     margin-left:-205px;

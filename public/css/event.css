@@ -14,7 +14,7 @@
     font-size:12px;
 }
 
-#add-ride-button {
+#show-add-ride {
     margin-left:8px;
 }
 
@@ -90,4 +90,9 @@
     color:#333;
     margin-top:-1px;
     margin-right:10px;
+}
+
+#way-there, #way-back, #leaving, #returning {
+    width: 150px !important;
+    margin-right: 20px;
 }

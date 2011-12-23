@@ -27,12 +27,33 @@ $(document).ready(function () {
             var fbid = response.authResponse.userID;
             D.log(fbid);
             $("#add-ride-button").live('click', function() {
+                var there = $("#way-there").val();
+                var back = $("#way-back").val();
+                console.log(there);
+                console.log(back);
+                var leaving = $("#leaving").val();
+                var returning = $("#returning").val();
+                var notes = $("#ride-notes").val();
                 socket.send({
                     type:"add_car",
                     fbid:fbid,
                     eid:eid,
+                    seats_there:there,
+                    seats_back:back,
+                    notes:notes,
+                    leaving:leaving,
+                    returning:returning,
                     path:window.location.pathname,
                 });
+            });
+            
+            $("#show-add-ride").live('click', function() {
+                $("#new-popup").removeClass("gone");
+            });
+
+            $("#add-ride-button").live('click', function() {
+                $("#new-popup input, #new-popup textarea").val("");
+                $(".popup").addClass("gone");
             });
             
             $(".join-ride-there").live('click', function() {

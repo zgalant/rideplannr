@@ -230,11 +230,6 @@ setTimeout(function(){
 
 function cleardb() {
     console.log("clearing db");
-    Car.find({}, function(err, cars) {
-        for (var i=0; i<cars.length; i++) {
-            cars[i].remove();
-        }
-    });
     
     User.find({}, function(err, cars) {
         for (var i=0; i<cars.length; i++) {
