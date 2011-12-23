@@ -65,6 +65,7 @@ function Actions() {
         User.findOne({fbid: fbid}, function(err, user) {
             Event.findOne({_id : eid}, function(err, ev) {
                 var ride = new Ride({
+                    ride_event:ev,
                     driver:user,
                     seats:seats,
                     leaving:leaving,

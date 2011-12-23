@@ -17,14 +17,15 @@ function SetUp(Goose) {
 
     // Define Ride model
     RideSchema = new Goose.Schema({
+        ride_event: {type: Goose.ObjectId, ref:'Event'},
         driver: {type: Goose.ObjectId, ref:'User'},
         riders:{
             there: [{type: Goose.ObjectId, ref:'User'}],
             back: [{type: Goose.ObjectId, ref:'User'}],
         },
         seats: {
-            there: Number,
-            back: Number,
+            there: { type: Number, default: 4 },
+            back: { type: Number, default: 4 },
         },
         notes: String,
         leaving: String,
