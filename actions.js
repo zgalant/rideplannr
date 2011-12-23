@@ -79,16 +79,25 @@ function Actions() {
     Action.join_car = function(msg, Goose, buffer) {
         var rid = msg.rid;
         var fbid = msg.fbid;
+        var way_there = msg.way_there;
+        var way_back = msg.way_back;
 
         User.findOne({fbid: fbid}, function(err, user) {
             Ride.findOne({_id : rid}, function(err, ride) {
-                ride.riders.push(user);
+                if (way_there) {
+                    ride.way_there.push(user);
+                }
+                if (way_back) {
+                    ride.way_back.push(user);
+                }
                 ride.save();
                 buffer.push({
                     path:msg.path,
                     type:"join_car",
                     ride:ride,
                     rider:user,
+                    way_there:way_there,
+                    way_back:way_back,
                 });
             });
         });

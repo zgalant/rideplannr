@@ -35,12 +35,36 @@ $(document).ready(function () {
                 });
             });
             
-            $(".join-ride-button").live('click', function() {
+            $(".join-ride-there").live('click', function() {
                 var rid = $(this).attr("data-rid");
                 socket.send({
                     type:"join_car",
                     fbid:fbid,
                     rid:rid,
+                    way_there:true,
+                    way_back:false,
+                    path:window.location.pathname,
+                });
+            });
+            $(".join-ride-back").live('click', function() {
+                var rid = $(this).attr("data-rid");
+                socket.send({
+                    type:"join_car",
+                    fbid:fbid,
+                    rid:rid,
+                    way_there:false,
+                    way_back:true,
+                    path:window.location.pathname,
+                });
+            });
+            $(".join-ride-both").live('click', function() {
+                var rid = $(this).attr("data-rid");
+                socket.send({
+                    type:"join_car",
+                    fbid:fbid,
+                    rid:rid,
+                    way_there:true,
+                    way_back:true,
                     path:window.location.pathname,
                 });
             });

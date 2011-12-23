@@ -10,9 +10,9 @@ var ride_listing_markup =
                                 <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
                                 <div class='join-ride-buttons'>\
                                     <div class='hopin'>Hop in:</div>\
-                                    <button type='submit' data-rid='${ride._id}'>Way There</button>\
-                                    <button type='submit' data-rid='${ride._id}'>Way Back</button>\
-                                    <button class='join-ride-button' type='submit' data-rid='${ride._id}'>Both</button>\
+                                    <button class='join-ride-there' type='submit' data-rid='${ride._id}'>Way There</button>\
+                                    <button class='join-ride-back' type='submit' data-rid='${ride._id}'>Way Back</button>\
+                                    <button class='join-ride-both' type='submit' data-rid='${ride._id}'>Both</button>\
                                 </div>\
                             </div>\
                             <div class='clear'></div>\
@@ -43,7 +43,12 @@ function msgReceived(msg){
                 $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
                 break;
             case "join_car":
-                $.tmpl(rider_in_car, msg).appendTo(".riders-list[data-rid='" + msg.ride._id + "']");
+                if (msg.way_there) {
+                    $.tmpl(rider_in_car, msg).appendTo(".way-there[data-rid='" + msg.ride._id + "']");
+                }
+                if (msg.way_back) {
+                    $.tmpl(rider_in_car, msg).appendTo(".way-back[data-rid='" + msg.ride._id + "']");
+                }
                 break;
         }
     }

@@ -28,7 +28,8 @@ function SetUp(Goose) {
     // Define Ride model
     RideSchema = new Goose.Schema({
         driver: {type: Goose.ObjectId, ref:'User'},
-        riders: [{type: Goose.ObjectId, ref:'User'}],
+        way_there: [{type: Goose.ObjectId, ref:'User'}],
+        way_back: [{type: Goose.ObjectId, ref:'User'}],
         car: {type: Goose.ObjectId, ref:'Car'},
         num_seats: Number,
         notes: String,
