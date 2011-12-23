@@ -8,10 +8,20 @@ var ride_listing_markup =
                                 <img class='user-image driver-image'\
                                     src='http://graph.facebook.com/${driver.fbid}/picture?type=square' />\
                                 <div class='user-name driver-name'>${driver.first_name} ${driver.last_name}</div>\
+                                <div class='join-ride-buttons'>\
+                                    <div class='hopin'>Hop in:</div>\
+                                    <button type='submit' data-rid='${ride._id}'>Way There</button>\
+                                    <button type='submit' data-rid='${ride._id}'>Way Back</button>\
+                                    <button class='join-ride-button' type='submit' data-rid='${ride._id}'>Both</button>\
+                                </div>\
                             </div>\
-                            <button class='join-ride-button' type='submit' data-rid='${ride._id}'>Join Ride</button>\
                             <div class='clear'></div>\
-                            <div class='riders-list' data-rid='${ride._id}'></div>\
+                            <div class='riders-list way-there' data-rid='${ride._id}'>\
+                                <div class='rider'>Way There</div>\
+                            </div>\
+                            <div class='riders-list way-back' data-rid='${ride._id}'>\
+                                <div class='rider'>Way Back</div>\
+                            </div>\
                         </div>";
                         
 var rider_in_car = "<div class='rider'>\
