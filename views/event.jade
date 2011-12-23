@@ -18,11 +18,23 @@ div#ride-list
             div.driver
                 img.user-image.driver-image(src="#", data-uid = ride.driver) 
                 div.user-name.driver-name(data-uid = ride.driver)
-                button.join-ride-button(type="submit", data-rid=ride._id) Join Ride
+                div.join-ride-buttons
+                    div.hopin Hop in:
+                    button(type="submit", data-rid=ride._id) Way There
+                    button(type="submit", data-rid=ride._id) Way Back
+                    button.join-ride-button(type="submit", data-rid=ride._id) Both
             div.clear
-            div.riders-list(data-rid=ride._id)
-            -each rider in ride.riders
-                div.rider
-                    img.user-image.rider-image(src="#", data-uid = rider)
-                    div.user-name.rider-name(data-uid = rider)
-                div.clear
+            div.way-there.riders-list(data-rid=ride._id)
+                div.rider Way There
+                -each rider in ride.riders
+                    div.rider
+                        img.user-image.rider-image(src="#", data-uid = rider)
+                        div.user-name.rider-name(data-uid = rider)
+                    div.clear
+            div.way-back.riders-list(data-rid=ride._id)
+                div.rider Way Back
+                -each rider in ride.riders
+                    div.rider
+                        img.user-image.rider-image(src="#", data-uid = rider)
+                        div.user-name.rider-name(data-uid = rider)
+                    div.clear
