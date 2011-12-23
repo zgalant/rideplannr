@@ -44,6 +44,7 @@ $(document).ready(function () {
                     leaving:leaving,
                     returning:returning,
                     path:window.location.pathname,
+                    sender:fbid,
                 });
             });
             

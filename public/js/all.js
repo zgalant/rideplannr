@@ -51,7 +51,12 @@ function msgReceived(msg){
                 $.tmpl(evnt_listing_markup, msg).appendTo("#event-list");
                 break;
             case "add_car":
-                $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
+                if (msg.success) {
+                    $.tmpl(ride_listing_markup, msg).appendTo("#ride-list");
+                } else {
+                    alert_user("You're already driving a car for this event.", msg.sender);
+                }
+                
                 break;
             case "join_car":
                 var alert_text = "";

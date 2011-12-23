@@ -62,28 +62,40 @@ function Actions() {
         var returning = msg.returning;
         var notes = msg.notes;
         
-        User.findOne({fbid: fbid}, function(err, user) {
-            Event.findOne({_id : eid}, function(err, ev) {
-                var ride = new Ride({
-                    ride_event:ev,
-                    driver:user,
-                    seats:seats,
-                    leaving:leaving,
-                    returning:returning,
-                    notes:notes,
-                });
-                ride.save();
-                ev.rides.push(ride);
-                ev.save();
-                buffer.push({
-                    path:msg.path,
-                    type:"add_car",
-                    ride:ride,
-                    driver:user,
-                    seats:seats,
-                    leaving:leaving,
-                    returning:returning,
-                    notes:notes,
+        Event.findOne({_id : eid}, function(err, ev) {
+            User.findOne({fbid: fbid}, function(err, user) {
+                Ride.findOne({ride_event:ev, driver:user}, function(err, existing_ride) {
+                    if (existing_ride) {
+                        buffer.push({
+                            path:msg.path,
+                            type:"add_car",
+                            success:false,
+                            sender:fbid,
+                        });
+                        return;
+                    }
+                    var ride = new Ride({
+                        ride_event:ev,
+                        driver:user,
+                        seats:seats,
+                        leaving:leaving,
+                        returning:returning,
+                        notes:notes,
+                    });
+                    ride.save();
+                    ev.rides.push(ride);
+                    ev.save();
+                    buffer.push({
+                        path:msg.path,
+                        type:"add_car",
+                        ride:ride,
+                        driver:user,
+                        seats:seats,
+                        leaving:leaving,
+                        returning:returning,
+                        notes:notes,
+                        success:true,
+                    });
                 });
             });
         });
