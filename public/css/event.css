@@ -21,8 +21,7 @@
 .ride-listing {
     padding:10px;
     margin:8px;
-    float:left;
-    width:200px;
+    width:900px;
     height:200px;
     border:2px solid #ccc;
     border-radius:5px;
@@ -68,6 +67,8 @@
 }
 
 .join-ride-button {
-    width:100%;
-    margin-bottom:5px;
+    width: 80px;
+    margin-top: 3px;
+    float: left;
+    margin-left: 20px;
 }

@@ -18,8 +18,7 @@ div#ride-list
             div.driver
                 img.user-image.driver-image(src="#", data-uid = ride.driver) 
                 div.user-name.driver-name(data-uid = ride.driver)
-            div.clear
-            button.join-ride-button(type="submit", data-rid=ride._id) Join Ride
+                button.join-ride-button(type="submit", data-rid=ride._id) Join Ride
             div.clear
             div.riders-list(data-rid=ride._id)
             -each rider in ride.riders
