@@ -1,4 +1,5 @@
 D = console;
+cur_user = "";      // the logged in user, so we know who's viewing the page
 
 var group_listing_markup = "<a href='/group/${group._id}' class='group'><div>${group.name}</div></a>";
 var evnt_listing_markup = "<a href='/event/${event._id}' class='event'><div>${event.name}</div></a>";
@@ -34,6 +35,12 @@ var rider_in_car_markup = "<div class='rider'>\
                         <div class='user-name rider-name'>${rider.first_name} ${rider.last_name}</div>\
                     </div><div class='clear'></div>";
 
+function alert_user(text, user) {
+    if (user == cur_user) {
+        alert(text);
+    }
+}
+
 function msgReceived(msg){
     if (msg.path == window.location.pathname) {
         switch (msg.type) {
@@ -64,7 +71,7 @@ function msgReceived(msg){
                     }
                 }
                 if (alert_text != "") {
-                    alert(alert_text);
+                    alert_user(alert_text, msg.sender);
                 }
                 break;
         }
@@ -88,6 +95,8 @@ $(document).ready(function () {
         FB.getLoginStatus(function(response) {
             if (response.status != "connected") {
                 window.location = "/";
+            } else {
+                cur_user = response.authResponse.userID;
             }
         });
     }

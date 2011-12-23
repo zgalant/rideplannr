@@ -65,6 +65,7 @@ $(document).ready(function () {
                     way_there:true,
                     way_back:false,
                     path:window.location.pathname,
+                    sender:fbid,
                 });
             });
             $(".join-ride-back").live('click', function() {
@@ -76,6 +77,7 @@ $(document).ready(function () {
                     way_there:false,
                     way_back:true,
                     path:window.location.pathname,
+                    sender:fbid,
                 });
             });
             $(".join-ride-both").live('click', function() {
@@ -87,6 +89,7 @@ $(document).ready(function () {
                     way_there:true,
                     way_back:true,
                     path:window.location.pathname,
+                    sender:fbid,
                 });
             });
         }
