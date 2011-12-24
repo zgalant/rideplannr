@@ -32,7 +32,7 @@ $(document).ready(function () {
                 var leaving = $("#leaving").val();
                 var returning = $("#returning").val();
                 var notes = $("#ride-notes").val();
-                if (parseInt(there <= 0) || parseInt(back) <= 0) {
+                if (parseInt(there) <= 0 || parseInt(back) <= 0) {
                     Alerts.alert_user("Invalid number of seats in the car.", fbid);
                     return;
                 }
