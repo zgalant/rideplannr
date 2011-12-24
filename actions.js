@@ -6,7 +6,11 @@ function Actions() {
         var group_name = msg.group_name;
         var group_info = msg.group_info;
         var fbid = msg.fbid;
-        Group.findOne({name:group_name}, function(err, group) {
+        var query_params = {name:group_name};
+        if (msg.group_id) {
+            query_params = {_id:msg.group_id};
+        }
+        Group.findOne(query_params, function(err, group) {
             if (group) {
                 console.log("group found: " + group._id);
             } else {
