@@ -81,7 +81,7 @@ function msgReceived(msg){
 
 $(document).ready(function () {
     socket = new io.Socket(null, {port: 5000});
-    socket.connect();
+    socket.connect("http://rideplannr.heroku.com");
     socket.on('message', function(msg){msgReceived(msg)});
     
     FB.init({ 
