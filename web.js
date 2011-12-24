@@ -8,8 +8,8 @@ Goose.mongoose = require('mongoose');
 Goose.Schema = Goose.mongoose.Schema;
 Goose.ObjectId = Goose.Schema.ObjectId;
 
-Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
-// Goose.mongoose.connect("mongodb://zach.galant@gmail.com:pspolice5@staff.mongohq.com:10066/app1082689");
+// Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
+Goose.mongoose.connect("mongodb://zach.galant@gmail.com:pspolice5@staff.mongohq.com:10066/app1082689");
 
 Goose.mongooseTypes = require("mongoose-types");
 Goose.useTimestamps = Goose.mongooseTypes.useTimestamps;
