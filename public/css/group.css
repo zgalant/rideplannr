@@ -79,3 +79,8 @@ a.event div:hover {
     text-decoration:underline;
     background:#eee;
 }
+
+
+#join-group-button {
+    margin-left:10px;
+}
