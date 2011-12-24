@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express.createServer(express.logger());
+var dbinfo = require('./secrets.js')
 
 // Mongoose
 var Goose = {};
@@ -9,7 +10,7 @@ Goose.Schema = Goose.mongoose.Schema;
 Goose.ObjectId = Goose.Schema.ObjectId;
 
 // Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
-Goose.mongoose.connect("mongodb://zach.galant@gmail.com:pspolice5@staff.mongohq.com:10066/app1082689");
+mongoose.connect('mongodb://' + dbinfo.user + ':' + dbinfo.pass + '@' + dbinfo.host + ':' + dbinfo.port + '/' + dbinfo.name)
 
 Goose.mongooseTypes = require("mongoose-types");
 Goose.useTimestamps = Goose.mongooseTypes.useTimestamps;
