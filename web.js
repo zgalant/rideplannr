@@ -174,8 +174,7 @@ app.get("/ajax/get_user", function(req, res) {
 
 
 
-// var port = process.env.PORT || 5000;
-var port = 5000;
+var port = process.env.PORT || 5000;
 app.listen(port, "http://rideplannr.heroku.com", function() {
     console.log("Listening on " + port);
 });
