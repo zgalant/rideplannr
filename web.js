@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express.createServer(express.logger());
-var dbinfo = require('./secrets.js')
+var dbinfo = require('./dbinfo.js')
 
 // Mongoose
 var Goose = {};
