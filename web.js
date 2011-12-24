@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express.createServer(express.logger());
-var dbinfo = require('./dbinfo.js')
+// var dbinfo = require('./dbinfo.js')
 
 // Mongoose
 var Goose = {};
@@ -10,7 +10,8 @@ Goose.Schema = Goose.mongoose.Schema;
 Goose.ObjectId = Goose.Schema.ObjectId;
 
 // Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
-mongoose.connect('mongodb://' + dbinfo.user + ':' + dbinfo.pass + '@' + dbinfo.host + ':' + dbinfo.port + '/' + dbinfo.name)
+// mongoose.connect('mongodb://' + dbinfo.user + ':' + dbinfo.pass + '@' + dbinfo.host + ':' + dbinfo.port + '/' + dbinfo.name);
+mongoose.connect("mongodb://heroku:passwrd12@staff.mongohq.com:10066/app1082689");
 
 Goose.mongooseTypes = require("mongoose-types");
 Goose.useTimestamps = Goose.mongooseTypes.useTimestamps;
