@@ -80,7 +80,8 @@ function msgReceived(msg){
 }
 
 $(document).ready(function () {
-    socket = new io.Socket(null, {port: 5000});
+    var port = process.env.PORT || 5000;
+    socket = new io.Socket(null, {port: port});
     socket.connect();
     socket.on('message', function(msg){msgReceived(msg)});
     
