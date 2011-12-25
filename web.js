@@ -9,9 +9,6 @@ Goose.mongoose = require('mongoose');
 Goose.Schema = Goose.mongoose.Schema;
 Goose.ObjectId = Goose.Schema.ObjectId;
 
-// Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
-// mongoose.connect('mongodb://' + dbinfo.user + ':' + dbinfo.pass + '@' + dbinfo.host + ':' + dbinfo.port + '/' + dbinfo.name);
-Goose.mongoose.connect("mongodb://heroku:passwrd12@staff.mongohq.com:10066/app1082689");
 
 Goose.mongooseTypes = require("mongoose-types");
 Goose.useTimestamps = Goose.mongooseTypes.useTimestamps;
@@ -35,10 +32,14 @@ app.configure(function() {
 
 app.configure('development', function() {
     app.use(express.errorHandler({dumpExceptions: true, showStack: true }));
+    Goose.mongoose.connect('mongodb://localhost/rideplannrdb');
+    console.log("dev");
 });
 
 app.configure('production', function() {
     app.use(express.errorHandler());
+    Goose.mongoose.connect("mongodb://heroku:passwrd12@staff.mongohq.com:10066/app1082689");
+    console.log("production");
 });
 // END Configuration
 
@@ -48,7 +49,8 @@ app.get('/cleardb', function(req, res) {
     cleardb();
     
     res.render('login.jade', { locals: {
-        title:'Login'
+        title:'Login',
+        development:(app.settings.env == "development"),
     }});
 });
 app.get('/', function(req, res) {
@@ -57,8 +59,13 @@ app.get('/', function(req, res) {
         console.log(users);
     });
     
+    // console.log(app);
+    console.log(app.settings.env);
+    
     res.render('login.jade', { locals: {
-        title:'Login'
+        title:'Login',
+        development:(app.settings.env == "development"),
+        
     }});
 });
 app.get('/user/:id', function(req, res) {
@@ -68,6 +75,7 @@ app.get('/user/:id', function(req, res) {
             Group.find({_id:{$in:user.groups}}, function(err, groups) {
                 res.render('user.jade', { locals: {
                     title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                    development:(app.settings.env == "development"),
                     user:user,
                     groups:groups
                 }});
@@ -76,6 +84,7 @@ app.get('/user/:id', function(req, res) {
         } else {
             res.render('user.jade', { locals: {
                 title:'RidePlannr',
+                development:(app.settings.env == "development"),
                 user:{
                     fbid:"#",
                     fbname:"no user exists",
@@ -131,6 +140,7 @@ app.get("/group/:id", function(req, res) {
             Event.find({group : group}, function(err, events) {
                 res.render('group.jade', { locals: {
                     title:'RidePlannr - ' + group.name,
+                    development:(app.settings.env == "development"),
                     group:group,
                     users:users,
                     events:events,
@@ -150,6 +160,7 @@ app.get("/event/:id", function(req, res) {
                 console.log(rides);
                 res.render('event.jade', { locals: {
                     title:'RidePlannr - ' + ev.name,
+                    development:(app.settings.env == "development"),
                     event:ev,
                     group:group,
                     rides:rides,

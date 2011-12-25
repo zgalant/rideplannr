@@ -84,8 +84,13 @@ $(document).ready(function () {
     socket.connect("http://rideplannr.heroku.com");
     socket.on('message', function(msg){msgReceived(msg)});
     
+    var appID = '268047249892587';
+    if ($("#development").html() == "true") {
+        appID = "222924957782676";
+    }
+    
     FB.init({ 
-        appId:'268047249892587',
+        appId:appID,
         cookie:true, 
         status:true,
         xfbml:true,
