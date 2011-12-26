@@ -9,7 +9,6 @@ function SetUp(Goose) {
         email: Goose.Email,
         phone: String,
         num_logins: Number,
-        cars: [{type: Goose.ObjectId, ref:'Car'}],
         groups: [{type: Goose.ObjectId, ref:'Group'}],
     });
     UserSchema.plugin(Goose.useTimestamps);
@@ -49,6 +48,7 @@ function SetUp(Goose) {
         name: String,
         description: String,
         events: [{type: Goose.ObjectId, ref:'Event'}],
+        users: [String],
     }); 
     GroupSchema.plugin(Goose.useTimestamps);
     Group = Goose.mongoose.model('Group', GroupSchema);

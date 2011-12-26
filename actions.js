@@ -27,6 +27,9 @@ function Actions() {
                     user.groups.push(group);
                     user.save();
                     console.log(user);
+                    
+                    group.users.push(user.fbid);
+                    group.save();
 
                     buffer.push({
                         path:msg.path,
