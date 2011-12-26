@@ -34,3 +34,16 @@ a.group div:hover {
     text-decoration:underline;
     background:#eee;
 }
+
+#group-search {
+    float:left;
+    width:300px;
+    height:400px;
+    margin-left:50px;
+}
+#group-search-input {
+    margin-bottom:10px;
+    padding:3px;
+    font-size:16px;
+    width:300px;
+}

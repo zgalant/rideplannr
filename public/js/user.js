@@ -31,4 +31,25 @@ $(document).ready(function () {
         $(".popup").addClass("gone");
     });
     
+    $("#group-search-input").live('keydown keypress keyup focus paste', function() {
+        var q = $(this).val();
+        $.ajax({
+            type:"GET",
+            url:"/ajax/group_search",
+            data:{
+                q:q,
+            },
+            dataType: 'JSON',
+            success: function(response) {
+                response = JSON.parse(response);
+                var groups = response.groups;
+                $("#group-search-list").html("");
+                $(groups).each(function(index, group) {
+                    $.tmpl(Markup.group_listing_markup, {group:group}).appendTo("#group-search-list");
+                });
+                
+            }
+        });
+    });
+    
 });

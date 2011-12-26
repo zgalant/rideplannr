@@ -181,6 +181,18 @@ app.get("/ajax/get_user", function(req, res) {
     });
 });
 
+app.get("/ajax/group_search", function(req, res) {
+    var q = req.query.q;
+    var regex = ".*" + q + ".*";
+    Group.find({name : {"$regex": regex}}, function(err, groups) {
+        res.write(JSON.stringify({
+            groups:groups
+        }));
+        res.end();
+        return;
+    });
+});
+
 // END URLS
 
 
