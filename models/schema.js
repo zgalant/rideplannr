@@ -10,7 +10,7 @@ function SetUp(Goose) {
         phone: String,
         num_logins: Number,
         groups: [{type: Goose.ObjectId, ref:'Group'}],
-        groups: [{type: Goose.ObjectId, ref:'Event'}],
+        events: [{type: Goose.ObjectId, ref:'Event'}],
     });
     UserSchema.plugin(Goose.useTimestamps);
     User = Goose.mongoose.model('User', UserSchema);
