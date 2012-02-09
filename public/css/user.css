@@ -55,18 +55,3 @@ a.group div:hover {
 #event-list {
     margin-top:20px;
 }
-
-a.event {
-    text-decoration:none;
-}
-a.event div {
-    padding:10px;
-    width:300px;
-    border-bottom: 1px solid #ccc;
-    color:#333;
-    font-size:20px;
-}
-a.event div:hover {
-    text-decoration:underline;
-    background:#eee;
-}
