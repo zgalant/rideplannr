@@ -72,6 +72,7 @@ app.get('/user/:id', function(req, res) {
     var fbid = req.params.id;
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
+            console.log(user);
             Group.find({_id:{$in:user.groups}}, function(err, groups) {
                 res.render('user.jade', { locals: {
                     title:'RidePlannr - ' + user.first_name + " " + user.last_name,
@@ -82,14 +83,40 @@ app.get('/user/:id', function(req, res) {
             });
 
         } else {
-            res.render('user.jade', { locals: {
-                title:'RidePlannr',
-                development:(app.settings.env == "development"),
-                user:{
-                    fbid:"#",
-                    fbname:"no user exists",
-                },
-            }});
+            User.findOne({_id:fbid}, function(err, user) {
+                if (user) {
+                    Group.find({_id:{$in:user.groups}}, function(err, groups) {
+                        res.render('user.jade', { locals: {
+                            title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                            development:(app.settings.env == "development"),
+                            user:user,
+                            groups:groups
+                        }});
+                    });
+                } else {
+                    User.findOne({username:fbid}, function(err, user) {
+                        if (user) {
+                            Group.find({_id:{$in:user.groups}}, function(err, groups) {
+                                res.render('user.jade', { locals: {
+                                    title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                                    development:(app.settings.env == "development"),
+                                    user:user,
+                                    groups:groups
+                                }});
+                            });
+                        } else {
+                            res.render('user.jade', { locals: {
+                                title:'RidePlannr',
+                                development:(app.settings.env == "development"),
+                                user:{
+                                    fbid:"#",
+                                    fbname:"no user exists",
+                                },
+                            }});
+                        }
+                    });
+                }
+            });
         }
     });
     
