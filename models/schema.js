@@ -10,6 +10,7 @@ function SetUp(Goose) {
         phone: String,
         num_logins: Number,
         groups: [{type: Goose.ObjectId, ref:'Group'}],
+        groups: [{type: Goose.ObjectId, ref:'Event'}],
     });
     UserSchema.plugin(Goose.useTimestamps);
     User = Goose.mongoose.model('User', UserSchema);
@@ -39,6 +40,7 @@ function SetUp(Goose) {
         info: String,
         group:{type: Goose.ObjectId, ref:'Group'},
         rides: [{type: Goose.ObjectId, ref:'Ride'}],
+        users: [{type: Goose.ObjectId, ref:'User'}],
     }); 
     EventSchema.plugin(Goose.useTimestamps);
     Event = Goose.mongoose.model('Event', EventSchema);
