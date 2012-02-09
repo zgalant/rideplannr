@@ -45,19 +45,51 @@ function Actions() {
         var event_name = msg.event_name;
         var event_info = msg.event_info;
         var gid = msg.group;
+        var uid = msg.uid;
         Group.findOne({_id : gid}, function(err, group) {
-            var nev = new Event({
-                name:event_name,
-                info:event_info,
-                group:group,
+            User.findOne({fbid : uid}, function(err, user) {
+                console.log("event creator: " + user);
+                var nev = new Event({
+                    name:event_name,
+                    info:event_info,
+                    group:group,
+                });
+                if (user) {
+                    nev.users.push(user);
+                }
+                nev.save();
+                if (group) {
+                    group.events.push(nev);
+                    group.save();
+                }
+                if (user) {
+                    user.events.push(nev);
+                    user.save();
+                }
+                buffer.push({
+                    path:msg.path,
+                    type:"add_event",
+                    event:nev,
+                });
             });
-            nev.save();
-            group.events.push(nev);
-            group.save();
+
+        });
+    }
+    Action.join_event = function(msg, Goose, buffer) {
+        var ev = msg.ev;
+        var uid = msg.uid;
+        User.findOne({fbid : uid}, function(err, user) {
+            if (user) {
+                nev.users.push(user);
+                nev.save();
+                user.events.push(nev);
+                user.save();
+            }
             buffer.push({
                 path:msg.path,
-                type:"add_event",
+                type:"join_event",
                 event:nev,
+                user:user
             });
         });
     }

@@ -75,12 +75,15 @@ app.get('/user/:id', function(req, res) {
         if (user) {
             console.log(user);
             Group.find({_id:{$in:user.groups}}, function(err, groups) {
-                res.render('user.jade', { locals: {
-                    title:'RidePlannr - ' + user.first_name + " " + user.last_name,
-                    development:(app.settings.env == "development"),
-                    user:user,
-                    groups:groups
-                }});
+                Event.find({_id:{$in:user.events}}, function(err, events) {
+                    res.render('user.jade', { locals: {
+                        title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                        development:(app.settings.env == "development"),
+                        user:user,
+                        groups:groups,
+                        events:events
+                    }});
+                });
             });
 
         } else {
@@ -88,24 +91,30 @@ app.get('/user/:id', function(req, res) {
             User.findOne({_id:fbid}, function(err, user) {
                 if (user) {
                     Group.find({_id:{$in:user.groups}}, function(err, groups) {
-                        res.render('user.jade', { locals: {
-                            title:'RidePlannr - ' + user.first_name + " " + user.last_name,
-                            development:(app.settings.env == "development"),
-                            user:user,
-                            groups:groups
-                        }});
+                        Event.find({_id:{$in:user.events}}, function(err, events) {
+                            res.render('user.jade', { locals: {
+                                title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                                development:(app.settings.env == "development"),
+                                user:user,
+                                groups:groups,
+                                events:events
+                            }});
+                        });
                     });
                 } else {
                     // Find User by username
                     User.findOne({username:fbid}, function(err, user) {
                         if (user) {
                             Group.find({_id:{$in:user.groups}}, function(err, groups) {
-                                res.render('user.jade', { locals: {
-                                    title:'RidePlannr - ' + user.first_name + " " + user.last_name,
-                                    development:(app.settings.env == "development"),
-                                    user:user,
-                                    groups:groups
-                                }});
+                                Event.find({_id:{$in:user.events}}, function(err, events) {
+                                    res.render('user.jade', { locals: {
+                                        title:'RidePlannr - ' + user.first_name + " " + user.last_name,
+                                        development:(app.settings.env == "development"),
+                                        user:user,
+                                        groups:groups,
+                                        events:events
+                                    }});
+                                });
                             });
                         } else {
                             res.render('user.jade', { locals: {

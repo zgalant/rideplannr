@@ -8,7 +8,7 @@ div
 
 div.clear.spacing   
     
-div#groups
+div#groups.gone
     div My Groups:
 
     div#group-list
@@ -16,14 +16,25 @@ div#groups
             a.group(href="/group/" + group._id)
                 div= group.name
                 
-button.right#show-group-popup(type="submit") Add A New Group
-div#group-search
+                
+
+button#show-event-popup(type="submit") Add A New Event
+div#events.clear
+    div My Events:
+
+    div#event-list
+        - each ev in events
+            a.group(href="/event/" + ev._id)
+                div= ev.name
+                
+button.right.gone#show-group-popup(type="submit") Add A New Group
+div#group-search.gone
     input#group-search-input(type="text", placeholder="Search for a group")
     div#group-search-list
 
 div.clear
 
-div#new-popup.popup.gone
+div#add-group-popup.new-popup.popup.gone
     div.header Add New Group
 
     div.field
@@ -37,4 +48,22 @@ div#new-popup.popup.gone
     div.clear
     div.buttons
         button#add-group-button(type="submit") Add Group
+        button.close-popup(type="submit") Cancel
+        
+        
+        
+div#add-event-popup.new-popup.popup.gone
+    div.header Add New Event
+
+    div.field
+        label Event Name
+        div.clear
+        input#add-event-name(type="text")
+    div.field
+        label Event Info
+        div.clear
+        textarea#add-event-info(type="text")
+    div.clear
+    div.buttons
+        button#add-event-button(type="submit") Add Event
         button.close-popup(type="submit") Cancel

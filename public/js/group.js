@@ -21,11 +21,11 @@ $(document).ready(function () {
             });
 
             $("#show-event-popup").live('click', function() {
-                $("#new-popup").removeClass("gone");
+                $("#add-event-popup").removeClass("gone");
             });
 
             $("#add-event-button").live('click', function() {
-                $("#new-popup input, #new-popup textarea").val("");
+                $("#add-event-popup input, #add-event-popup textarea").val("");
                 $(".popup").addClass("gone");
             });
 
