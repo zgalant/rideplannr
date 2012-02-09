@@ -36,7 +36,7 @@ $(document).ready(function () {
                     Alerts.alert_user("Invalid number of seats in the car.", fbid);
                     return;
                 }
-                $("#new-popup input, #new-popup textarea").val("");
+                $(".new-popup input, .new-popup textarea").val("");
                 $(".popup").addClass("gone");
                 socket.send({
                     type:"add_car",
@@ -55,8 +55,8 @@ $(document).ready(function () {
             });
             
             $("#show-add-ride").live('click', function() {
-                $("#new-popup").removeClass("gone");
-                $("#new-popup input[type='number']").val("4");
+                $(".new-popup").removeClass("gone");
+                $(".new-popup input[type='number']").val("4");
             });
             
             $(".join-ride-there").live('click', function() {
