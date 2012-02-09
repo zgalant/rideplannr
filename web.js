@@ -70,6 +70,7 @@ app.get('/', function(req, res) {
 });
 app.get('/user/:id', function(req, res) {
     var fbid = req.params.id;
+    // Find User By FBID
     User.findOne({fbid:fbid}, function(err, user) {
         if (user) {
             console.log(user);
@@ -83,6 +84,7 @@ app.get('/user/:id', function(req, res) {
             });
 
         } else {
+            // Find User by _id
             User.findOne({_id:fbid}, function(err, user) {
                 if (user) {
                     Group.find({_id:{$in:user.groups}}, function(err, groups) {
@@ -94,6 +96,7 @@ app.get('/user/:id', function(req, res) {
                         }});
                     });
                 } else {
+                    // Find User by username
                     User.findOne({username:fbid}, function(err, user) {
                         if (user) {
                             Group.find({_id:{$in:user.groups}}, function(err, groups) {
