@@ -6,13 +6,17 @@ $(document).ready(function () {
         D.log(response);
         if (response.status == "connected") {
             var fbid = response.authResponse.userID;
-            socket.send({
-                type:"join_event",
-                uid:fbid,
-                eid:eid,
-                path:window.location.pathname,
-                sender:fbid
+            
+            $("#join-button").live('click', function() {
+                socket.send({
+                    type:"join_event",
+                    uid:fbid,
+                    eid:eid,
+                    path:window.location.pathname,
+                    sender:fbid
+                });
             });
+
             D.log(fbid);
             $("#add-ride-button").live('click', function() {
                 var there = $("#way-there").val();

@@ -7,6 +7,10 @@ div.event-title
     div.event-name= event.name
     div.event-info= event.info
             
+div.left-margin#event-buttons
+    button#join-button Join
+    
+div.clear.spacing
 div#event-users
     div.left-margin Members of this event:
     - each u in event.users

@@ -12,9 +12,10 @@ div#groups.gone
     div My Groups:
 
     div#group-list
-        - each group in groups
-            a.group.list-item(href="/group/" + group._id)
-                div= group.name
+        - if (groups)
+            - each group in groups
+                a.group.list-item(href="/group/" + group._id)
+                    div= group.name
                 
                 
 
