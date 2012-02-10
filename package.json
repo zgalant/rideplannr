@@ -1,6 +1,6 @@
 {
     "name": "rideplannr",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "private": true,
     "dependencies": {
         "express":"2.4.3",
@@ -8,6 +8,7 @@
         "mongodb": ">= 0.9.6-18",
         "socket.io": "0.6.17",
         "mongoose": "2.2.3",
-        "mongoose-types": "1.0.3"
+        "mongoose-types": "1.0.3",
+        "connect-auth": "0.4.1"
     }
 }
