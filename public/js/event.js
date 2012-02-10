@@ -1,30 +1,23 @@
 $(document).ready(function () {
     var eid = $("#eid").html();
     
+    
     $(".user-name[data-uid]").each(function() {
         var user_name = this;
-        var uid = $(user_name).attr("data-uid");
-        D.log(uid);
-        $.ajax({
-            type:"GET",
-            url:"/ajax/get_user",
-            data:{
-                uid:uid,
-            },
-            dataType: 'JSON',
-            success: function(response) {
-                response = JSON.parse(response);
-                var user = response.user;
-                $(user_name).html(user.first_name + " " + user.last_name);
-                $(".user-image[data-uid='" + uid + "']").attr("src", "http://graph.facebook.com/" + user.fbid + "/picture?type=square");
-            }
-        });
+        showUserInfo(this);
     });
     
     FB.getLoginStatus(function(response) {
         D.log(response);
         if (response.status == "connected") {
             var fbid = response.authResponse.userID;
+            socket.send({
+                type:"join_event",
+                uid:fbid,
+                eid:eid,
+                path:window.location.pathname,
+                sender:fbid
+            });
             D.log(fbid);
             $("#add-ride-button").live('click', function() {
                 var there = $("#way-there").val();

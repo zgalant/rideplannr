@@ -36,4 +36,10 @@ Markup.rider_in_car_markup = "<div class='rider'>\
                         <div class='user-name rider-name'>${rider.first_name} ${rider.last_name}</div>\
                     </div><div class='clear'></div>";
                     
-                    
+Markup.event_attendee_markup = "<div class='left gone user-name' data-uid='${user._id}'></div>\
+                                <a href='/user/${user._id}' class='left event-user-image'>\
+                                    <img class='user-image' data-uid='${user._id}' src='#'/>\
+                                </a>";
+
+
+

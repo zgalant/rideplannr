@@ -1,6 +1,26 @@
 D = console;
 cur_user = "";      // the logged in user, so we know who's viewing the page
 
+function showUserInfo(user_name) {
+    var uid = $(user_name).attr("data-uid");
+    D.log(uid);
+    $.ajax({
+        type:"GET",
+        url:"/ajax/get_user",
+        data:{
+            uid:uid,
+        },
+        dataType: 'JSON',
+        success: function(response) {
+            response = JSON.parse(response);
+            var user = response.user;
+            $(user_name).html(user.first_name + " " + user.last_name);
+            $(".user-image[data-uid='" + uid + "']").attr("src", "http://graph.facebook.com/" + user.fbid + "/picture?type=square");
+        }
+    });
+}
+
+
 function msgReceived(msg){
     if (msg.path == window.location.pathname) {
         switch (msg.type) {
@@ -38,6 +58,11 @@ function msgReceived(msg){
                 if (alert_text != "") {
                     Alerts.alert_user(alert_text, msg.sender);
                 }
+                break;
+            case "join_event":
+                var new_attendee = $.tmpl(Markup.event_attendee_markup, msg)
+                new_attendee.appendTo("#event-users");
+                showUserInfo(new_attendee[0]);
                 break;
         }
     }

@@ -108,3 +108,11 @@
     width: 150px !important;
     margin-right: 20px;
 }
+
+a.event-user-image {
+    margin-left:10px;
+}
+a.event-user-image img {
+    width:40px;
+    height:40px;
+}

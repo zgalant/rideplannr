@@ -1,4 +1,5 @@
 module.exports.Actions = Actions;
+
 function Actions() {
     Action = {};
     Action.join_group = function(msg, Goose, buffer) {
@@ -76,21 +77,24 @@ function Actions() {
         });
     }
     Action.join_event = function(msg, Goose, buffer) {
-        var ev = msg.ev;
+        var eid = msg.eid;
         var uid = msg.uid;
         User.findOne({fbid : uid}, function(err, user) {
-            if (user) {
-                nev.users.push(user);
-                nev.save();
-                user.events.push(nev);
-                user.save();
-            }
-            buffer.push({
-                path:msg.path,
-                type:"join_event",
-                event:nev,
-                user:user
+            Event.findOne({_id: eid, users:{$nin:[user]}}, function(err, ev) {
+                if (user && ev) {
+                    ev.users.push(user);
+                    ev.save();
+                    user.events.push(ev);
+                    user.save();
+                    buffer.push({
+                        path:msg.path,
+                        type:"join_event",
+                        event:ev,
+                        user:user
+                    });
+                }
             });
+
         });
     }
     Action.add_car = function(msg, Goose, buffer) {

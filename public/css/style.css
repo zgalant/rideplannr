@@ -11,6 +11,10 @@ body {
     height:10px;
 }
 
+.left-margin {
+    margin-left:10px;
+}
+
 .clear {
     clear:both;
 }

@@ -275,6 +275,9 @@ socket.on('connection', function(client){
         case "join_car":
             Action.join_car(msg, Goose, buffer);
             break;
+        case "join_event":
+            Action.join_event(msg, Goose, buffer);
+            break;
             
             
             

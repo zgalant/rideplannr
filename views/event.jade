@@ -7,6 +7,14 @@ div.event-title
     div.event-name= event.name
     div.event-info= event.info
             
+div#event-users
+    div.left-margin Members of this event:
+    - each u in event.users
+        div.left.gone.user-name(data-uid = u)
+        a.left.event-user-image(href= "/user/" + u)
+            img.user-image(src="#", data-uid = u)
+
+div.clear.spacing
 div#ride-list
     button.left#show-add-ride(type="submit") Add Your Car
     div.spacing
