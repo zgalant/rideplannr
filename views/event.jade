@@ -8,11 +8,13 @@ div.event-title
     div.event-info= event.info
             
 div.left-margin#event-buttons
-    button#join-button Join
+    button.left#join-button Join
+    button.left#show-add-ride(type="submit") Add Your Car
     
 div.clear.spacing
 div#event-users
     div.left-margin Members of this event:
+    div.clear.spacing
     - each u in event.users
         div.left.gone.user-name(data-uid = u)
         a.left.event-user-image(href= "/user/" + u)
@@ -20,11 +22,7 @@ div#event-users
 
 div.clear.spacing
 div#ride-list
-    button.left#show-add-ride(type="submit") Add Your Car
     div.spacing
-    div.spacing
-    div.spacing
-    
     - each ride in rides
         div.ride-listing(data-rid=ride._id)
             div.driver
