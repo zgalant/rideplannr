@@ -2,11 +2,6 @@ $(document).ready(function () {
     var eid = $("#eid").html();
     
     
-    $(".user-name[data-uid]").each(function() {
-        var user_name = this;
-        showUserInfo(this);
-    });
-    
     FB.getLoginStatus(function(response) {
         D.log(response);
         if (response.status == "connected") {

@@ -96,6 +96,11 @@ $(document).ready(function () {
         });
     }
     
+    $(".user-name[data-uid]").each(function() {
+        var user_name = this;
+        showUserInfo(this);
+    });
+    
     $("#logout-button").live('click', function() {
         FB.logout(function(response) {
             console.log('logged out');
